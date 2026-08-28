@@ -1,19 +1,25 @@
 import { Button } from "@/components/ui/button"
 import CursorGrid from '@/components/CursorGrid';
 import LineSidebar from '@/components/LineSidebar';
+import Navbar from '@/components/Navbar';
+import SpecularButton from '@/components/SpecularButton';
+import { ProgressiveBlur } from "@/components/ui/progressive-blur"
 
 
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
+    <div className="flex min-h-svh p-6 pt-32">
+      <Navbar />
       <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
         <div>
       
           <h1 className="font-medium">Welcome!</h1>
           <p>Insert witty paragraph.</p>
           <p>insert follow-up text here.</p>
-          <Button className="mt-2">Contact Me</Button>
+          <SpecularButton className="mt-2">Contact Me</SpecularButton>
+      
+          
           <LineSidebar
   items={['Overview', 'Skills', 'My Works', 'Backgrounds', 'Showcase']}
   accentColor="#00B8DB"
@@ -34,6 +40,7 @@ export function App() {
   defaultActive={0}
   onItemClick={(index, label) => console.log(index, label)}
 />
+
         </div>
         <div className="font-mono text-xs text-muted-foreground">
           (Press <kbd>d</kbd> to toggle dark mode)
@@ -58,6 +65,7 @@ export function App() {
     pulseSpeed={600}
   />
 </div>
+<ProgressiveBlur height="30%" position="bottom" />
     </div>
   )
 }
