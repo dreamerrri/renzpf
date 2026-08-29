@@ -1,14 +1,109 @@
+import { useEffect, useState } from 'react'
+import TextType from '@/components/TextType'
+import SpecularButton from '@/components/SpecularButton'
+import { LinkButton } from '@/components/ui/button'
+
+const ROLES = ['Frontend Developer', 'UI Engineer', 'Creative Coder', 'Problem Solver']
+
+/** Small self-contained typewriter that cycles through a list of words. */
+function RotatingRole({ words }: { words: string[] }) {
+  const [wordIndex, setWordIndex] = useState(0)
+  const [subIndex, setSubIndex] = useState(0)
+  const [deleting, setDeleting] = useState(false)
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length]
+    let t: number
+
+    if (!deleting && subIndex === current.length) {
+      // Fully typed: hold for a beat, then start deleting.
+      t = setTimeout(() => setDeleting(true), 1600)
+    } else if (deleting && subIndex === 0) {
+      // Fully deleted: advance to the next word and begin typing it.
+      t = setTimeout(() => {
+        setDeleting(false)
+        setWordIndex(i => (i + 1) % words.length)
+      }, 60)
+    } else {
+      // Otherwise type or delete a single character.
+      t = setTimeout(
+        () => setSubIndex(s => s + (deleting ? -1 : 1)),
+        deleting ? 40 : 90
+      )
+    }
+
+    return () => clearTimeout(t)
+  }, [deleting, subIndex, wordIndex, words])
+
+  return <span className="text-[#00B8DB]">{words[wordIndex % words.length].slice(0, subIndex)}</span>
+}
+
+const ACCENT = '#00B8DB'
+
 export default function UglyHero() {
-    return (
-   <div className="min-h-screen flex items-center justify-center">
-    
-        <h1 className="text-6xl font-bold text-center">
-            Welcome to my portfolio!
-        </h1>
-        <p className="mt-4 text-lg text-center">
-            Explore my projects and skills.
-        </p>
+  return (
+    <section className="relative z-10 mx-auto flex min-h-svh max-w-5xl flex-col justify-center px-6 md:px-12">
+      {/* kicker */}
+      <p className="mb-4 font-mono text-sm text-[#00B8DB]">
+        <span className="mr-2 text-muted-foreground">01.</span> Hi, my name is
+      </p>
+
+      {/* name — types out on load, cursor keeps blinking */}
+      <h1 className="text-5xl font-black leading-tight text-foreground md:text-7xl">
+        <TextType
+          text="Andrew"
+          typingSpeed={150}
+          initialDelay={400}
+          cursorCharacter="_"
+          cursorBlinkDuration={0.6}
+        />
+        <span className="text-[#00B8DB]">.</span>
+      </h1>
+
+      {/* role — rotating typewriter */}
+      <p className="mt-4 min-h-[1.5em] text-2xl font-semibold text-muted-foreground md:text-4xl">
+        I’m a&nbsp;<RotatingRole words={ROLES} />
+      </p>
+
+      {/* description */}
+      <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+        I build fast, accessible, and detail-obsessed experiences for the web. From
+        pixel-perfect UI to silky interactions, I care about the craft and the people
+        who use it.
+      </p>
+
+      {/* CTA row */}
+      <div className="mt-10 flex flex-wrap items-center gap-4">
+        <SpecularButton lineColor={ACCENT} className="mt-0">
+          Get in touch
+        </SpecularButton>
+        <LinkButton
+          href="#work"
+          variant="outline"
+          className="border-[#00B8DB] text-[#00B8DB] hover:bg-[#00B8DB] hover:text-background"
+        >
+          See my work ↓
+        </LinkButton>
       </div>
 
-    );
+      {/* meta strip */}
+      <div className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-muted-foreground">
+        <span>
+          <span className="text-[#00B8DB]">●</span> Open to work
+        </span>
+        <span>React · TypeScript · Tailwind · Vite</span>
+        <a href="mailto:you@example.com" className="hover:text-[#00B8DB]">
+          you@example.com
+        </a>
+      </div>
+
+      {/* scroll cue */}
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce text-muted-foreground md:block">
+        <svg width="20" height="32" viewBox="0 0 20 32" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" strokeWidth="2" />
+          <circle cx="10" cy="9" r="3" fill="currentColor" />
+        </svg>
+      </div>
+    </section>
+  )
 }

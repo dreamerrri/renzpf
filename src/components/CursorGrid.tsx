@@ -299,14 +299,16 @@ const CursorGrid = ({
     rebuild();
     wake();
 
-    container.addEventListener('pointermove', onPointerMove);
-    container.addEventListener('pointerdown', onPointerDown);
+    // Listen on `window` so the grid tracks the cursor everywhere, even when
+    // other content is layered on top of the fixed background container.
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerdown', onPointerDown);
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
-      container.removeEventListener('pointermove', onPointerMove);
-      container.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerdown', onPointerDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellSize]);

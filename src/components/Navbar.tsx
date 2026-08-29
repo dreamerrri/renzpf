@@ -179,7 +179,7 @@ const Navbar = ({ isHome = false }: NavbarProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 z-40 flex w-full items-center justify-between border-b border-border bg-background/80 px-6 backdrop-blur-md transition-transform duration-300 md:px-10 lg:px-12 ${
+      className={`fixed top-0 left-0 z-40 flex w-full items-center justify-between bg-transparent px-6 transition-transform duration-300 md:px-10 lg:px-12 ${
         hidden ? '-translate-y-full' : 'translate-y-0'
       }`}
       style={{ height: scrolledToTop ? '5rem' : '4rem' }}
