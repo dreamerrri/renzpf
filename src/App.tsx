@@ -1,7 +1,7 @@
 import CursorGrid from '@/components/CursorGrid'
 import Navbar from '@/components/Navbar'
 import UglyHero from '@/components/UglyHero'
-import ProjectsGrid from '@/components/ProjectsGrid'
+import ProjectShowcase from '@/components/ProjectShowcase'
 import GradualBlur from '@/components/GradualBlur'
 
 export function App() {
@@ -32,7 +32,7 @@ export function App() {
         <UglyHero />
       </div>
 
-      <ProjectsGrid />
+      <ProjectShowcase />
 
       <div className="relative z-10 px-6 pb-8 font-mono text-xs text-muted-foreground">
         (Press <kbd>d</kbd> to toggle dark mode)
