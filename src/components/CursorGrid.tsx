@@ -100,7 +100,6 @@ const CursorGrid = ({
     if (!ctx) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // Grid state: one alpha + timestamp pair per cell, indexed row-major.
     let cols = 0;
     let rows = 0;
     let offX = 0;
@@ -125,7 +124,6 @@ const CursorGrid = ({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cols = Math.ceil(w / p.cellSize) + 1;
       rows = Math.ceil(h / p.cellSize) + 1;
-      // Center the lattice so edge cells crop evenly on both sides
       offX = (w - cols * p.cellSize) / 2;
       offY = (h - rows * p.cellSize) / 2;
       alphas = new Float32Array(cols * rows);
@@ -139,8 +137,6 @@ const CursorGrid = ({
       return [cx, cy];
     };
 
-    // Light up every cell whose center falls inside the radius, with the
-    // configured falloff curve mapping distance to brightness.
     const energize = (x: number, y: number, boost?: number) => {
       const p = propsRef.current;
       const r = Math.max(p.radius, 1);
@@ -174,7 +170,6 @@ const CursorGrid = ({
       ctx.clearRect(0, 0, w, h);
       const [cr, cg, cb] = hexToRgb(p.color);
 
-      // Optional faint static lattice
       if (p.gridOpacity > 0) {
         ctx.strokeStyle = `rgba(${cr}, ${cg}, ${cb}, ${p.gridOpacity})`;
         ctx.lineWidth = 1;
@@ -192,7 +187,6 @@ const CursorGrid = ({
         ctx.stroke();
       }
 
-      // Expanding click pulses hand their energy to cells as they pass
       for (let pi = pulses.length - 1; pi >= 0; pi--) {
         const pulse = pulses[pi];
         const age = (now - pulse.t0) / 1000;
@@ -299,8 +293,6 @@ const CursorGrid = ({
     rebuild();
     wake();
 
-    // Listen on `window` so the grid tracks the cursor everywhere, even when
-    // other content is layered on top of the fixed background container.
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerdown', onPointerDown);
 
@@ -313,7 +305,6 @@ const CursorGrid = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellSize]);
 
-  // Repaint static layers when visual props change while idle
   useEffect(() => {
     wakeRef.current?.();
   }, [gridOpacity, color, lineWidth, maxOpacity, fillOpacity, cellRadius]);

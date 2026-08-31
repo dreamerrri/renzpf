@@ -6,7 +6,6 @@ interface Project {
   tags: string[]
 }
 
-// Placeholder projects — replace these with your real previous projects.
 const PROJECTS: Project[] = Array.from({ length: 16 }, (_, i) => ({
   title: `Project ${String(i + 1).padStart(2, '0')}`,
   description:
@@ -40,7 +39,6 @@ export default function ProjectsGrid() {
           >
             <article className="flex h-full min-h-[16rem] flex-col p-6">
               <div className="mb-4 flex items-center justify-between">
-                {/* folder icon */}
                 <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
                     d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"

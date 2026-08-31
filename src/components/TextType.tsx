@@ -2,28 +2,16 @@ import { useEffect, useRef, useState, type ElementType } from 'react'
 import { gsap } from 'gsap'
 
 interface TextTypeProps {
-  /** The text to type out. */
   text: string | string[]
-  /** Element to render as. */
   as?: ElementType
-  /** Milliseconds between each typed character. */
   typingSpeed?: number
-  /** Delay in ms before typing starts. */
   initialDelay?: number
-  /** Character rendered as the blinking cursor. */
   cursorCharacter?: string
-  /** Extra classes for the cursor element. */
   cursorClassName?: string
-  /** Cursor blink cycle duration in *seconds*. */
   cursorBlinkDuration?: number
   className?: string
 }
 
-/**
- * TypeScript port of React Bits' `TextType` (text type animation).
- * Uses `gsap` for the cursor blink exactly like the original component
- * (https://reactbits.dev/text-animations/text-type).
- */
 function TextType({
   text,
   as: Tag = 'span',
@@ -39,12 +27,10 @@ function TextType({
   const cursorRef = useRef<HTMLSpanElement>(null)
 
   const textArray = Array.isArray(text) ? text : [text]
-  // Single static headline: type the first string once, then keep the cursor blinking.
   const targetText = textArray[0] ?? ''
 
   const doneTyping = currentCharIndex >= targetText.length
 
-  // Blink the cursor continuously with gsap (matches the original implementation).
   useEffect(() => {
     const cursor = cursorRef.current
     if (!cursor) return
@@ -63,7 +49,6 @@ function TextType({
     }
   }, [cursorBlinkDuration])
 
-  // Type characters one-by-one until the headline is complete, then stop.
   useEffect(() => {
     const start = setTimeout(
       () => {

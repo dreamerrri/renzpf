@@ -16,7 +16,6 @@ const NAV_LINKS: NavLink[] = [
   { name: 'Contact', url: '/#contact' }
 ]
 
-/** Tracks whether the user is scrolling up or down (used to hide the navbar). */
 function useScrollDirection(initialDirection: ScrollDirection): ScrollDirection {
   const [scrollDir, setScrollDir] = useState<ScrollDirection>(initialDirection)
 
@@ -61,12 +60,10 @@ const Logo = () => (
   </a>
 )
 
-/** Mobile hamburger + slide-in sidebar. */
 function Menu() {
   const [menuOpen, setMenuOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  // Close on Escape
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMenuOpen(false)
@@ -75,7 +72,6 @@ function Menu() {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [])
 
-  // Close when resized back to desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 768) setMenuOpen(false)
@@ -84,7 +80,6 @@ function Menu() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  // Close when clicking outside
   useEffect(() => {
     const onClickOutside = (e: MouseEvent | TouchEvent) => {
       if (!wrapperRef.current || wrapperRef.current.contains(e.target as Node)) return
@@ -190,7 +185,6 @@ const Navbar = ({ isHome = false }: NavbarProps) => {
       >
         <Logo />
 
-        {/* Desktop links + resume */}
         <div className="hidden items-center md:flex">
           <ol className="m-0 flex list-none p-0">
             {NAV_LINKS.map(({ url, name }, i) => (

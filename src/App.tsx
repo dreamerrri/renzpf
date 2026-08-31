@@ -8,7 +8,6 @@ export function App() {
   return (
     <div className="relative min-h-svh">
 
-      {/* animated grid app background (behind all content) */}
       <div className="fixed inset-0 z-0" aria-hidden="true">
         <CursorGrid
           cellSize={70}
@@ -29,12 +28,10 @@ export function App() {
 
       <Navbar />
 
-      {/* main content on top of the background */}
       <div className="relative z-10 flex min-h-svh flex-col px-6 pt-32">
         <UglyHero />
       </div>
 
-      {/* previous projects grid */}
       <ProjectsGrid />
 
       <div className="relative z-10 px-6 pb-8 font-mono text-xs text-muted-foreground">
@@ -53,11 +50,8 @@ export function App() {
   />
     </div>
 
-    
   )
 }
 
 export default App
-
-
 
