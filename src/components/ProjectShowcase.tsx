@@ -212,7 +212,7 @@ function MockScreenshot() {
 function GlowCard({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
     <BorderGlow
-      backgroundColor="#0b1118"
+      backgroundColor="#131a22"
       glowColor="188 90 58"
       colors={GLOW_COLORS}
       fillOpacity={0.4}
