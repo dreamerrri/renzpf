@@ -3,7 +3,7 @@ import TextType from '@/components/TextType'
 import SpecularButton from '@/components/SpecularButton'
 import { LinkButton } from '@/components/ui/button'
 
-const ROLES = ['Frontend Developer', 'UI Engineer', 'Creative Coder', 'Problem Solver']
+const ROLES = ['Frontend Developer', 'UI Engineer', 'Backend Developer', 'Chill Guy']
 
 function RotatingRole({ words }: { words: string[] }) {
   const [wordIndex, setWordIndex] = useState(0)
@@ -63,6 +63,7 @@ export default function UglyHero() {
         pixel-perfect UI to silky interactions, I care about the craft and the people
         who use it.
       </p>
+      
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
         <SpecularButton lineColor={ACCENT} className="mt-0">

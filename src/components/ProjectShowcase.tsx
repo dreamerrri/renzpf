@@ -39,13 +39,13 @@ function cardCount(project: Project): number {
 const PROJECTS: Project[] = [
   {
     index: '01',
-    title: 'Nebula Dashboard',
-    tagline: 'Analytics platform',
+    title: "Aki's Thrift Shop",
+    tagline: 'E-commerce/Inventory system',
     description:
       'A realtime analytics dashboard that turns raw event streams into clear, interactive visualizations. Swap this placeholder for a real project title, summary, tags, and links.',
     tags: ['React', 'TypeScript', 'D3.js', 'Tailwind', 'WebSockets'],
-    year: '2025',
-    role: 'Lead Frontend',
+    year: '2024-2025',
+    role: 'Lead Developer',
     details: [
       {
         kicker: 'Overview',
@@ -73,8 +73,8 @@ const PROJECTS: Project[] = [
   },
   {
     index: '02',
-    title: 'Fieldnote',
-    tagline: 'Offline-first journaling PWA',
+    title: 'Techstacks Logify',
+    tagline: 'HR/Payroll management system',
     description:
       'A progressive web app for capturing notes and photos anywhere — fully functional offline, syncs when you reconnect. Swap this placeholder for a real project title, summary, tags, and links.',
     tags: ['React', 'PWA', 'IndexedDB', 'Service Workers', 'Tailwind'],
@@ -107,7 +107,7 @@ const PROJECTS: Project[] = [
   },
   {
     index: '03',
-    title: 'Cartway',
+    title: 'Frascio',
     tagline: 'E-commerce storefront',
     description:
       'A headless commerce storefront focused on conversion: instant search, optimistic cart updates, and a checkout flow measured in seconds. Swap this placeholder for a real project title, summary, tags, and links.',
@@ -141,8 +141,8 @@ const PROJECTS: Project[] = [
   },
   {
     index: '04',
-    title: 'Pulseboard',
-    tagline: 'Realtime collaboration tool',
+    title: 'Invoicify',
+    tagline: 'Invoice & billing platform',
     description:
       'A collaborative whiteboard where cursors, comments, and edits appear instantly for every participant. Swap this placeholder for a real project title, summary, tags, and links.',
     tags: ['React', 'TypeScript', 'CRDTs', 'Canvas API', 'Tailwind'],
@@ -360,10 +360,13 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          // Stay pinned exactly as long as the horizontal content needs.
-          end: () => '+=' + Math.max(getDistance(), 1),
+          // Give extra vertical runway so 1px of scroll !== 1px of horizontal
+          // travel. More runway = slower, smoother-feeling pan.
+          end: () => '+=' + (getDistance() * 1.5 + window.innerHeight * 0.25),
           pin: true,
-          scrub: 1,
+          // Higher scrub = more inertia/lag = less stiff.
+          // 1 is nearly 1:1 (snappy). 1.5–2 feels buttery.
+          scrub: 1.8,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: self => {
@@ -382,13 +385,21 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
 
             // Subtle depth: cards near the viewport center are fully visible,
             // cards entering/leaving are slightly smaller and dimmed.
+            // Use gsap.set (GPU-composited, batched) instead of raw
+            // style.transform writes to avoid layout thrash / jank.
             const viewportCenter = window.innerWidth / 2
             for (const card of cards) {
               const rect = card.getBoundingClientRect()
               const center = rect.left + rect.width / 2
               const d = Math.min(Math.abs(center - viewportCenter) / viewportCenter, 1)
-              card.style.opacity = String(1 - d * 0.45)
-              card.style.transform = `scale(${1 - d * 0.08})`
+              // Ease the falloff so edges fade gradually instead of linearly.
+              const eased = d * d * (3 - 2 * d) // smoothstep
+              gsap.set(card, {
+                opacity: 1 - eased * 0.45,
+                scale: 1 - eased * 0.06,
+                transformOrigin: 'center center',
+                overwrite: 'auto',
+              })
             }
           }
         }
