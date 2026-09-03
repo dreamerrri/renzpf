@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { LinkButton } from '@/components/ui/button'
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
+import { useTheme } from '@/components/theme-provider'
 import TextType from '@/components/TextType'
 
 type ScrollDirection = 'up' | 'down'
@@ -59,6 +61,37 @@ const Logo = () => (
     />
   </a>
 )
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const [resolved, setResolved] = useState<'dark' | 'light'>(() =>
+    typeof window !== 'undefined' &&
+    document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light'
+  )
+
+  useEffect(() => {
+    if (theme === 'dark' || theme === 'light') {
+      setResolved(theme)
+      return
+    }
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const update = () => setResolved(mq.matches ? 'dark' : 'light')
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [theme])
+
+  return (
+    <AnimatedThemeToggler
+      theme={resolved}
+      onThemeChange={t => setTheme(t)}
+      duration={600}
+      className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-[#00B8DB] [&_svg]:size-4"
+    />
+  )
+}
 
 function Menu() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -185,27 +218,36 @@ const Navbar = ({ isHome = false }: NavbarProps) => {
       >
         <Logo />
 
-        <div className="hidden items-center md:flex">
-          <ol className="m-0 flex list-none p-0">
-            {NAV_LINKS.map(({ url, name }, i) => (
-              <li key={i} className="relative mx-[5px] text-xs">
-                <a
-                  href={url}
-                  className="nav-fade-down inline-block px-2.5 py-2.5 text-muted-foreground transition-colors hover:text-[#00B8DB]"
-                  style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}
-                >
-                  <span className="mr-[5px] text-left text-[#00B8DB]">{String(i + 1).padStart(2, '0')}.</span>
-                  {name}
-                </a>
-              </li>
-            ))}
-          </ol>
-          <div className="nav-fade-down" style={{ transitionDelay: `${isHome ? NAV_LINKS.length * 100 : 0}ms` }}>
-            {resumeButton}
+        <div className="flex items-center gap-1 md:gap-2">
+          <div className="hidden items-center md:flex">
+            <ol className="m-0 flex list-none p-0">
+              {NAV_LINKS.map(({ url, name }, i) => (
+                <li key={i} className="relative mx-[5px] text-xs">
+                  <a
+                    href={url}
+                    className="nav-fade-down inline-block px-2.5 py-2.5 text-muted-foreground transition-colors hover:text-[#00B8DB]"
+                    style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}
+                  >
+                    <span className="mr-[5px] text-left text-[#00B8DB]">{String(i + 1).padStart(2, '0')}.</span>
+                    {name}
+                  </a>
+                </li>
+              ))}
+            </ol>
+            <div className="nav-fade-down" style={{ transitionDelay: `${isHome ? NAV_LINKS.length * 100 : 0}ms` }}>
+              {resumeButton}
+            </div>
           </div>
-        </div>
 
-        <Menu />
+          <div
+            className="nav-fade-down"
+            style={{ transitionDelay: `${isHome ? (NAV_LINKS.length + 1) * 100 : 0}ms` }}
+          >
+            <ThemeToggle />
+          </div>
+
+          <Menu />
+        </div>
       </nav>
     </header>
   )

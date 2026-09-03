@@ -1,4 +1,4 @@
-import { useRef, useEffect, type CSSProperties, type ReactNode, type MouseEventHandler } from 'react';
+import { useRef, useEffect, useState, type CSSProperties, type ReactNode, type MouseEventHandler } from 'react';
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
 
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -114,9 +114,9 @@ const SpecularButton = ({
   tint = '#ffffff',
   tintOpacity = 0,
   blur = 0,
-  textColor = '#f5f5f5',
+  textColor,
   lineColor = '#ffffff',
-  baseColor = '#525252',
+  baseColor,
   intensity = 1,
   shineSize = 10,
   shineFade = 40,
@@ -133,8 +133,30 @@ const SpecularButton = ({
   const btnRef = useRef<HTMLButtonElement>(null);
   const fxRef = useRef<HTMLSpanElement>(null);
   const propsRef = useRef<ShaderProps>({} as ShaderProps);
+  const [isDark, setIsDark] = useState(() =>
+    typeof document !== 'undefined'
+      ? document.documentElement.classList.contains('dark')
+      : true
+  );
 
-  propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
+  useEffect(() => {
+    const update = () =>
+      setIsDark(document.documentElement.classList.contains('dark'));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  // Theme-aware defaults: light text / dark-grey edge was designed for dark
+  // mode only. Fall back to readable values in light mode unless explicitly overridden.
+  const resolvedTextColor = textColor ?? (isDark ? '#f5f5f5' : '#0f172a');
+  const resolvedBaseColor = baseColor ?? (isDark ? '#525252' : '#94a3b8');
+
+  propsRef.current = { radius, lineColor, baseColor: resolvedBaseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
 
   useEffect(() => {
     const btn = btnRef.current;
@@ -263,14 +285,14 @@ const SpecularButton = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`relative m-0 inline-flex cursor-pointer items-center justify-center border-none font-medium leading-none tracking-[0.01em] outline-none transition-transform duration-150 active:scale-[0.97] disabled:cursor-default disabled:opacity-55 disabled:active:scale-100 [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] [backdrop-filter:blur(var(--sb-blur))] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.25)] focus-visible:outline-2 focus-visible:outline-offset-[3px] ${SIZES[size] || SIZES.md}${className ? ` ${className}` : ''}`}
+      className={`relative m-0 inline-flex cursor-pointer items-center justify-center border-none font-medium leading-none tracking-[0.01em] outline-none transition-transform duration-150 active:scale-[0.97] disabled:cursor-default disabled:opacity-55 disabled:active:scale-100 [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] [backdrop-filter:blur(var(--sb-blur))] ${isDark ? 'shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.25)]' : 'shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_8px_24px_rgba(15,23,42,0.12)]'} focus-visible:outline-2 focus-visible:outline-offset-[3px] ${SIZES[size] || SIZES.md}${className ? ` ${className}` : ''}`}
       style={
         {
           '--sb-radius': `${radius}px`,
           '--sb-tint': tint,
           '--sb-tint-opacity': tintOpacity,
           '--sb-blur': `${blur}px`,
-          '--sb-text-color': textColor
+          '--sb-text-color': resolvedTextColor
         } as CSSProperties
       }
     >

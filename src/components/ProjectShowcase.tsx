@@ -177,22 +177,22 @@ const PROJECTS: Project[] = [
 
 function MockScreenshot() {
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0d141d]">
-      <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
-        <span className="size-2 rounded-full bg-white/20" />
-        <span className="size-2 rounded-full bg-white/20" />
-        <span className="size-2 rounded-full bg-white/20" />
-        <span className="ml-3 h-4 flex-1 rounded-sm bg-white/5" />
+    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border bg-muted/50">
+      <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
+        <span className="size-2 rounded-full bg-foreground/20" />
+        <span className="size-2 rounded-full bg-foreground/20" />
+        <span className="size-2 rounded-full bg-foreground/20" />
+        <span className="ml-3 h-4 flex-1 rounded-sm bg-foreground/5" />
       </div>
       <div className="grid min-h-0 flex-1 grid-cols-[auto_1fr] gap-3 p-3">
         <div className="hidden flex-col gap-2 sm:flex">
           {[0, 1, 2, 3].map(i => (
-            <span key={i} className="h-2.5 w-10 rounded-sm bg-white/10" />
+            <span key={i} className="h-2.5 w-10 rounded-sm bg-foreground/10" />
           ))}
         </div>
         <div className="grid min-h-0 grid-rows-[1fr_auto] gap-3">
           <div
-            className="min-h-16 rounded-md border border-white/5"
+            className="min-h-16 rounded-md border border-border"
             style={{
               background:
                 'linear-gradient(135deg, rgba(0,184,219,0.35) 0%, rgba(45,212,191,0.18) 45%, rgba(56,189,248,0.08) 100%)'
@@ -200,7 +200,7 @@ function MockScreenshot() {
           />
           <div className="grid grid-cols-3 gap-2">
             {[0, 1, 2].map(i => (
-              <span key={i} className="h-8 rounded-md bg-white/5" />
+              <span key={i} className="h-8 rounded-md bg-foreground/5" />
             ))}
           </div>
         </div>
@@ -209,13 +209,33 @@ function MockScreenshot() {
   )
 }
 
+function useIsDark() {
+  const [isDark, setIsDark] = useState(() =>
+    typeof document !== 'undefined'
+      ? document.documentElement.classList.contains('dark')
+      : true
+  )
+  useEffect(() => {
+    const update = () =>
+      setIsDark(document.documentElement.classList.contains('dark'))
+    update()
+    const observer = new MutationObserver(update)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+    return () => observer.disconnect()
+  }, [])
+  return isDark
+}
+
 function GlowCard({ children, className = '' }: { children: ReactNode; className?: string }) {
+  const isDark = useIsDark()
   return (
     <BorderGlow
-      backgroundColor="#131a22"
       glowColor="188 90 58"
       colors={GLOW_COLORS}
-      fillOpacity={0.4}
+      fillOpacity={isDark ? 0.4 : 0.25}
       borderRadius={20}
       glowRadius={36}
       animated={false}
@@ -301,7 +321,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         {detail.stats && (
           <dl className="mt-auto grid grid-cols-3 gap-3 pt-8">
             {detail.stats.map(stat => (
-              <div key={stat.label} className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+              <div key={stat.label} className="rounded-lg border border-border bg-muted/50 p-3">
                 <dt className="font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">
                   {stat.label}
                 </dt>

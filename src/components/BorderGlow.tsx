@@ -75,7 +75,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   className = '',
   edgeSensitivity = 30,
   glowColor = '188 90 58',
-  backgroundColor = '#131a22',
+  backgroundColor = 'var(--card)',
   borderRadius = 28,
   glowRadius = 40,
   glowIntensity = 1.0,
@@ -89,6 +89,23 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   const [cursorAngle, setCursorAngle] = useState(45);
   const [edgeProximity, setEdgeProximity] = useState(0);
   const [sweepActive, setSweepActive] = useState(false);
+  const [isDark, setIsDark] = useState(() =>
+    typeof document !== 'undefined'
+      ? document.documentElement.classList.contains('dark')
+      : true
+  );
+
+  useEffect(() => {
+    const update = () =>
+      setIsDark(document.documentElement.classList.contains('dark'));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const getCenterOfElement = useCallback((el: HTMLElement) => {
     const { width, height } = el.getBoundingClientRect();
@@ -167,12 +184,14 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
       onPointerMove={handlePointerMove}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
-      className={`relative grid isolate border border-white/15 ${className}`}
+      className={`relative grid isolate border border-border ${className}`}
       style={{
         background: backgroundColor,
         borderRadius: `${borderRadius}px`,
         transform: 'translate3d(0, 0, 0.01px)',
-        boxShadow: 'rgba(0,0,0,0.1) 0 1px 2px, rgba(0,0,0,0.1) 0 2px 4px, rgba(0,0,0,0.1) 0 4px 8px, rgba(0,0,0,0.1) 0 8px 16px, rgba(0,0,0,0.1) 0 16px 32px, rgba(0,0,0,0.1) 0 32px 64px',
+        boxShadow: isDark
+          ? 'rgba(0,0,0,0.1) 0 1px 2px, rgba(0,0,0,0.1) 0 2px 4px, rgba(0,0,0,0.1) 0 4px 8px, rgba(0,0,0,0.1) 0 8px 16px, rgba(0,0,0,0.1) 0 16px 32px, rgba(0,0,0,0.1) 0 32px 64px'
+          : 'rgba(15,23,42,0.06) 0 1px 2px, rgba(15,23,42,0.06) 0 4px 12px, rgba(15,23,42,0.08) 0 12px 32px',
       }}
     >
       <div
@@ -216,8 +235,8 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
           ].join(', '),
           maskComposite: 'subtract, add, add, add, add, add',
           WebkitMaskComposite: 'source-out, source-over, source-over, source-over, source-over, source-over',
-          opacity: borderOpacity * fillOpacity,
-          mixBlendMode: 'soft-light',
+          opacity: borderOpacity * fillOpacity * (isDark ? 1 : 0.7),
+          mixBlendMode: isDark ? 'soft-light' : 'overlay',
           transition: isVisible ? 'opacity 0.25s ease-out' : 'opacity 0.75s ease-in-out',
         } as React.CSSProperties}
       />
@@ -228,8 +247,8 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
           inset: `${-glowRadius}px`,
           maskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
           WebkitMaskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
-          opacity: glowOpacity,
-          mixBlendMode: 'plus-lighter',
+          opacity: glowOpacity * (isDark ? 1 : 0.55),
+          mixBlendMode: isDark ? 'plus-lighter' : 'normal',
           transition: isVisible ? 'opacity 0.25s ease-out' : 'opacity 0.75s ease-in-out',
         } as React.CSSProperties}
       >
