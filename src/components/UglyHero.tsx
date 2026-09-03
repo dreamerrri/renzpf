@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import TextType from '@/components/TextType'
+import ProfileBadge from '@/components/ProfileBadge'
 import SpecularButton from '@/components/SpecularButton'
 import { LinkButton } from '@/components/ui/button'
 
@@ -43,20 +44,26 @@ export default function UglyHero() {
         <span className="mr-2 text-muted-foreground">01.</span> Hi, my name is
       </p>
 
-      <h1 className="text-5xl font-black leading-tight text-foreground md:text-7xl">
-        <TextType
-          text="Andrew"
-          typingSpeed={150}
-          initialDelay={400}
-          cursorCharacter="_"
-          cursorBlinkDuration={0.6}
-        />
-        <span className="text-[#00B8DB]">.</span>
-      </h1>
+      <div className="flex items-center justify-between gap-6 md:gap-10">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-5xl font-black leading-tight text-foreground md:text-7xl">
+            <TextType
+              text="Andrew"
+              typingSpeed={150}
+              initialDelay={400}
+              cursorCharacter="_"
+              cursorBlinkDuration={0.6}
+            />
+            <span className="text-[#00B8DB]">.</span>
+          </h1>
 
-      <p className="mt-4 min-h-[1.5em] text-2xl font-semibold text-muted-foreground md:text-4xl">
-        I’m a&nbsp;<RotatingRole words={ROLES} />
-      </p>
+          <p className="mt-4 min-h-[1.5em] text-2xl font-semibold text-muted-foreground md:text-4xl">
+            I’m a&nbsp;<RotatingRole words={ROLES} />
+          </p>
+        </div>
+
+        <ProfileBadge dragRange={160} className="shrink-0" />
+      </div>
 
       <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
         I build fast, accessible, and detail-obsessed experiences for the web. From
