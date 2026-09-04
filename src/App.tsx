@@ -6,6 +6,7 @@ import CursorGrid from '@/components/CursorGrid'
 import Navbar from '@/components/Navbar'
 import UglyHero from '@/components/UglyHero'
 import ProjectShowcase from '@/components/ProjectShowcase'
+import Skills from '@/components/Skills'
 import GradualBlur from '@/components/GradualBlur'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -66,6 +67,8 @@ export function App() {
       </div>
 
       <ProjectShowcase />
+
+      <Skills />
 
       <div className="relative z-10 px-6 pb-8 font-mono text-xs text-muted-foreground">
         (Press <kbd>d</kbd> to toggle dark mode)

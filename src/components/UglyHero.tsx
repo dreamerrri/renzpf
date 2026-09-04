@@ -3,7 +3,7 @@ import TextType from '@/components/TextType'
 import ProfileBadge from '@/components/ProfileBadge'
 import SpecularButton from '@/components/SpecularButton'
 
-const ROLES = ['Frontend Dev', 'UI Engineer', 'Backend Dev', 'Chill Guy']
+const ROLES = ['Frontend Developer', 'UI Engineer', 'Backend Developer', 'Chill Guy']
 
 function RotatingRole({ words }: { words: string[] }) {
   const [wordIndex, setWordIndex] = useState(0)
