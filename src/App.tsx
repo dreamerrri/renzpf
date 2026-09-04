@@ -36,6 +36,7 @@ function useSmoothScroll() {
 
 export function App() {
   useSmoothScroll()
+
   return (
     <div className="relative min-h-svh">
 
@@ -83,9 +84,7 @@ export function App() {
 
   
 
-
-
-
+  
 
     </div>
 

@@ -62,7 +62,12 @@ export default function UglyHero() {
           </p>
         </div>
 
-        <ProfileBadge dragRange={160} className="shrink-0" />
+        <ProfileBadge
+          dragRange={160}
+          photoSrc="/tree.png"
+          stickerSrc="/man.png"
+          className="shrink-0"
+        />
       </div>
 
       <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">

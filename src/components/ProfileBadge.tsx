@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+// Important Note: re-added after the 5b1ec32 revert — vendored UFO pet parked
+// behind the sticker; remove this import if the pet gets its own package.
+import CursorPet from '@/components/CursorPet'
 
 interface ProfileBadgeProps {
-  /** Main photo underneath. Placeholder by default — swap for a real portrait. */
   photoSrc?: string
-  /** Draggable sticker layered on top. Placeholder by default. */
   stickerSrc?: string
   name?: string
-  /** Max drag distance in px in any direction. */
   dragRange?: number
   className?: string
 }
@@ -16,12 +16,6 @@ const DEFAULT_DRAG_RANGE = 160
 const PLACEHOLDER_PHOTO = 'https://picsum.photos/seed/profile-placeholder/320/320'
 const PLACEHOLDER_STICKER = 'https://picsum.photos/seed/profile-sticker/320/320'
 
-/**
- * Native port of the draggable profile-badge hero pattern:
- * a framed portrait with a grabbable sticker on top, subtle
- * cursor parallax, and a dashed-frame active state.
- * No animation dependencies — pointer events + CSS transitions only.
- */
 export default function ProfileBadge({
   photoSrc = PLACEHOLDER_PHOTO,
   stickerSrc = PLACEHOLDER_STICKER,
@@ -35,6 +29,10 @@ export default function ProfileBadge({
   const [active, setActive] = useState(false)
   const [parallax, setParallax] = useState({ x: 0, y: 0 })
   const [reducedMotion, setReducedMotion] = useState(false)
+  // Important Note: re-added after the 5b1ec32 revert — one-way latch that wakes
+  // the parked UFO pet on first real drag. Revisit if the pet moves out.
+  const [petAwake, setPetAwake] = useState(false)
+  const revealedRef = useRef(false)
 
   const frameRef = useRef<HTMLDivElement>(null)
   const dragStart = useRef<{ x: number; y: number } | null>(null)
@@ -48,18 +46,29 @@ export default function ProfileBadge({
     return () => mq.removeEventListener('change', update)
   }, [])
 
-  const dragDistance = Math.hypot(drag.x, drag.y)
-  const reveal = Math.min(dragDistance / dragRange, 1)
-  // At rest the sticker covers the photo, so the photo sits dimmed;
-  // dragging the sticker aside reveals it (mirrors the original).
-  const photoOpacity = 0.55 + reveal * 0.45
-  const photoScale = 0.96 + reveal * 0.04
+  // Important Note: re-added after the 5b1ec32 revert — dimming removed so the
+  // bottom layer stays at full opacity. To restore the original rest-dim
+  // effect, replace the two lines below with:
+  //   const dragDistance = Math.hypot(drag.x, drag.y)
+  //   const reveal = Math.min(dragDistance / dragRange, 1)
+  //   const photoOpacity = 0.55 + reveal * 0.45
+  //   const photoScale = 0.96 + reveal * 0.04
+  const photoOpacity = 1
+  const photoScale = 1
 
   const handleDragMove = (clientX: number, clientY: number) => {
     const start = dragStart.current
     if (!start) return
     const clamp = (v: number) => Math.max(-dragRange, Math.min(dragRange, v))
-    setDrag({ x: clamp(clientX - start.x), y: clamp(clientY - start.y) })
+    const nx = clamp(clientX - start.x)
+    const ny = clamp(clientY - start.y)
+    setDrag({ x: nx, y: ny })
+    // Important Note: re-added after the 5b1ec32 revert — wakes the parked UFO
+    // pet once per mount when the sticker is dragged past 40px.
+    if (!revealedRef.current && Math.hypot(nx, ny) >= 40) {
+      revealedRef.current = true
+      setPetAwake(true)
+    }
   }
 
   const endDrag = () => {
@@ -88,21 +97,24 @@ export default function ProfileBadge({
       onPointerLeave={() => setParallax({ x: 0, y: 0 })}
     >
       <div
+        // Important Note: re-added after the 5b1ec32 revert — transform and
+        // will-change are dropped once the pet wakes. Either one makes this
+        // ancestor a containing block for fixed elements and would break the
+        // pet's viewport positioning (it flew off to the right).
         style={
-          reducedMotion
+          reducedMotion || petAwake
             ? undefined
             : {
                 transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
                 transition: dragging ? 'none' : 'transform 0.3s ease-out',
               }
         }
-        className="will-change-transform"
+        className={petAwake ? undefined : 'will-change-transform'}
       >
         <div
           ref={frameRef}
           className="relative grid size-28 p-1.5 xl:size-36"
         >
-          {/* Solid frame — hidden while hovering / dragging */}
           <span
             aria-hidden="true"
             className={cn(
@@ -110,7 +122,6 @@ export default function ProfileBadge({
               active && 'hidden'
             )}
           />
-          {/* Dashed frame — shown while hovering / dragging */}
           <span
             aria-hidden="true"
             className={cn(
@@ -128,6 +139,22 @@ export default function ProfileBadge({
             className="col-start-1 row-start-1 h-full w-full rounded-xl object-cover"
             style={{ opacity: photoOpacity, transform: `scale(${photoScale})` }}
           />
+          {/* Important Note: re-added after the 5b1ec32 revert — UFO pet parked
+              as a grid item between photo and sticker (32px, centered, hidden
+              behind the opaque sticker). On wake it snaps to the frame center
+              pre-paint and flies to the cursor. Skipped under reduced motion.
+              Shortcut remapped off the default Alt+C so it can't desync. */}
+          {!reducedMotion && (
+            <CursorPet
+              spriteImage="/ufo.png"
+              enabled={petAwake}
+              parked={!petAwake}
+              anchorRef={frameRef}
+              toggleKey="0"
+              toggleModifier="meta"
+              className="col-start-1 row-start-1 place-self-center"
+            />
+          )}
           <img
             src={stickerSrc}
             alt=""
@@ -135,7 +162,7 @@ export default function ProfileBadge({
             width={320}
             height={320}
             draggable={false}
-            className="col-start-1 row-start-1 z-[1] h-full w-full rounded-xl object-cover"
+            className="col-start-1 row-start-1 z-[1] h-full w-full rounded-xl bg-transparent object-cover"
             style={{
               transform: `translate3d(${drag.x}px, ${drag.y}px, 0) scale(${pressed ? 0.9 : 1})`,
               transition: dragging
@@ -147,7 +174,6 @@ export default function ProfileBadge({
         </div>
       </div>
 
-      {/* Grab layer over the badge */}
       <div
         className="-inset-2 absolute z-[2]"
         style={{ cursor: dragging || pressed ? 'grabbing' : 'grab', touchAction: 'none' }}

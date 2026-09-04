@@ -151,8 +151,6 @@ const SpecularButton = ({
     return () => observer.disconnect();
   }, []);
 
-  // Theme-aware defaults: light text / dark-grey edge was designed for dark
-  // mode only. Fall back to readable values in light mode unless explicitly overridden.
   const resolvedTextColor = textColor ?? (isDark ? '#f5f5f5' : '#0f172a');
   const resolvedBaseColor = baseColor ?? (isDark ? '#525252' : '#94a3b8');
 

@@ -357,6 +357,7 @@ interface ProjectSectionProps {
 function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }: ProjectSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
   const counterRef = useRef<HTMLSpanElement>(null)
 
@@ -365,29 +366,48 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
 
     const section = sectionRef.current
     const track = trackRef.current
+    const inner = innerRef.current
     if (!section || !track) return
 
     const cards = gsap.utils.toArray<HTMLElement>('.project-card', track)
     const totalCards = cards.length
 
-    // Horizontal distance the track must travel across the pinned section.
+    ScrollTrigger.config({ ignoreMobileResize: true })
+
     const getDistance = () => Math.max(0, track.scrollWidth - track.clientWidth)
 
     const ctx = gsap.context(() => {
+      if (inner) {
+        gsap.fromTo(
+          inner,
+          { y: 60, opacity: 0.35 },
+          {
+            y: 0,
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 95%',
+              end: 'top 35%',
+              scrub: 1.2,
+              invalidateOnRefresh: true,
+            },
+          }
+        )
+      }
+
       gsap.to(track, {
         x: () => -getDistance(),
         ease: 'none',
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          // Give extra vertical runway so 1px of scroll !== 1px of horizontal
-          // travel. More runway = slower, smoother-feeling pan.
           end: () => '+=' + (getDistance() * 1.5 + window.innerHeight * 0.25),
           pin: true,
-          // Higher scrub = more inertia/lag = less stiff.
-          // 1 is nearly 1:1 (snappy). 1.5–2 feels buttery.
           scrub: 1.8,
           anticipatePin: 1,
+          fastScrollEnd: true,
+          preventOverlaps: true,
           invalidateOnRefresh: true,
           onUpdate: self => {
             const progress = self.progress
@@ -403,17 +423,12 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
               counterRef.current.textContent = String(current).padStart(2, '0')
             }
 
-            // Subtle depth: cards near the viewport center are fully visible,
-            // cards entering/leaving are slightly smaller and dimmed.
-            // Use gsap.set (GPU-composited, batched) instead of raw
-            // style.transform writes to avoid layout thrash / jank.
             const viewportCenter = window.innerWidth / 2
             for (const card of cards) {
               const rect = card.getBoundingClientRect()
               const center = rect.left + rect.width / 2
               const d = Math.min(Math.abs(center - viewportCenter) / viewportCenter, 1)
-              // Ease the falloff so edges fade gradually instead of linearly.
-              const eased = d * d * (3 - 2 * d) // smoothstep
+              const eased = d * d * (3 - 2 * d)
               gsap.set(card, {
                 opacity: 1 - eased * 0.45,
                 scale: 1 - eased * 0.06,
@@ -437,10 +452,11 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
       aria-label={`${project.title} — project ${projectNumber} of ${totalProjects}`}
     >
       <div
+        ref={innerRef}
         className={
           reducedMotion
             ? 'mx-auto flex w-full max-w-7xl flex-col gap-8 px-0 py-24'
-            : 'flex h-full min-h-0 flex-col justify-center gap-5 py-20 md:gap-7 md:py-24'
+            : 'flex h-full min-h-0 flex-col justify-center gap-5 py-20 will-change-transform md:gap-7 md:py-24'
         }
       >
         <header className="flex items-end justify-between gap-4 px-6 md:px-12">
