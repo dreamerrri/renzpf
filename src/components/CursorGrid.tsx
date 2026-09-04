@@ -75,7 +75,8 @@ const CursorGrid = ({
   const propsRef = useRef<GridConfig>({} as GridConfig);
   const wakeRef = useRef<(() => void) | null>(null);
 
-  propsRef.current = {
+  useEffect(() => {
+    propsRef.current = {
     cellSize,
     color,
     radius,
@@ -89,7 +90,8 @@ const CursorGrid = ({
     cellRadius,
     clickPulse,
     pulseSpeed
-  };
+    };
+  });
 
   useEffect(() => {
     const container = containerRef.current;

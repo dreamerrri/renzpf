@@ -154,7 +154,9 @@ const SpecularButton = ({
   const resolvedTextColor = textColor ?? (isDark ? '#f5f5f5' : '#0f172a');
   const resolvedBaseColor = baseColor ?? (isDark ? '#525252' : '#94a3b8');
 
-  propsRef.current = { radius, lineColor, baseColor: resolvedBaseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
+  useEffect(() => {
+    propsRef.current = { radius, lineColor, baseColor: resolvedBaseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
+  });
 
   useEffect(() => {
     const btn = btnRef.current;
