@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 // Important Note: re-added after the 5b1ec32 revert — vendored UFO pet parked
 // behind the sticker; remove this import if the pet gets its own package.
@@ -79,6 +80,21 @@ export default function ProfileBadge({
     setActive(false)
   }
 
+  // Important Note: UFO pet element. Parked in-flow behind the sticker until
+  // wake; portaled to document.body on wake so the badge's transform can stay
+  // without hijacking the pet's fixed viewport positioning.
+  const petNode = !reducedMotion ? (
+    <CursorPet
+      spriteImage="/ufo.png"
+      enabled={petAwake}
+      parked={!petAwake}
+      anchorRef={frameRef}
+      toggleKey="0"
+      toggleModifier="meta"
+      className={petAwake ? '' : 'col-start-1 row-start-1 place-self-center'}
+    />
+  ) : null
+
   return (
     <div
       ref={parallaxZone}
@@ -91,25 +107,23 @@ export default function ProfileBadge({
         const rect = el.getBoundingClientRect()
         const relX = e.clientX - (rect.left + rect.width / 2)
         const relY = e.clientY - (rect.top + rect.height / 2)
-        const clampP = (v: number) => Math.max(-16, Math.min(16, v))
-        setParallax({ x: clampP(relX / 10), y: clampP(relY / 10) })
+        const clampP = (v: number) => Math.max(-24, Math.min(24, v))
+        setParallax({ x: clampP(relX / 6), y: clampP(relY / 6) })
       }}
       onPointerLeave={() => setParallax({ x: 0, y: 0 })}
     >
       <div
-        // Important Note: re-added after the 5b1ec32 revert — transform and
-        // will-change are dropped once the pet wakes. Either one makes this
-        // ancestor a containing block for fixed elements and would break the
-        // pet's viewport positioning (it flew off to the right).
+        // Important Note: parallax transform stays on permanently now — the pet
+        // portals out of this subtree on wake, so fixed positioning is safe.
         style={
-          reducedMotion || petAwake
+          reducedMotion
             ? undefined
             : {
                 transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
                 transition: dragging ? 'none' : 'transform 0.3s ease-out',
               }
         }
-        className={petAwake ? undefined : 'will-change-transform'}
+        className="will-change-transform"
       >
         <div
           ref={frameRef}
@@ -141,20 +155,10 @@ export default function ProfileBadge({
           />
           {/* Important Note: re-added after the 5b1ec32 revert — UFO pet parked
               as a grid item between photo and sticker (32px, centered, hidden
-              behind the opaque sticker). On wake it snaps to the frame center
-              pre-paint and flies to the cursor. Skipped under reduced motion.
-              Shortcut remapped off the default Alt+C so it can't desync. */}
-          {!reducedMotion && (
-            <CursorPet
-              spriteImage="/ufo.png"
-              enabled={petAwake}
-              parked={!petAwake}
-              anchorRef={frameRef}
-              toggleKey="0"
-              toggleModifier="meta"
-              className="col-start-1 row-start-1 place-self-center"
-            />
-          )}
+              behind the opaque sticker). On wake it remounts via portal below,
+              snaps to the frame center pre-paint, and flies to the cursor.
+              Skipped under reduced motion. Shortcut remapped off Alt+C. */}
+          {!petAwake && petNode}
           <img
             src={stickerSrc}
             alt=""
@@ -189,13 +193,14 @@ export default function ProfileBadge({
         }}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        onPointerEnter={e => {
+        onPointerEnter={() => {
           setActive(true)
         }}
-        onPointerLeave={e => {
+        onPointerLeave={() => {
           if (!dragStart.current && !pressed) setActive(false)
         }}
       />
+      {petAwake && petNode ? createPortal(petNode, document.body) : null}
     </div>
   )
 }

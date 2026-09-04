@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import TextType from '@/components/TextType'
 import ProfileBadge from '@/components/ProfileBadge'
 import SpecularButton from '@/components/SpecularButton'
-import { LinkButton } from '@/components/ui/button'
 
-const ROLES = ['Frontend Developer', 'UI Engineer', 'Backend Developer', 'Chill Guy']
+const ROLES = ['Frontend Dev', 'UI Engineer', 'Backend Dev', 'Chill Guy']
 
 function RotatingRole({ words }: { words: string[] }) {
   const [wordIndex, setWordIndex] = useState(0)
@@ -81,13 +80,6 @@ export default function UglyHero() {
         <SpecularButton lineColor={ACCENT} className="mt-0">
           Get in touch
         </SpecularButton>
-        <LinkButton
-          href="#work"
-          variant="outline"
-          className="border-[#00B8DB] text-[#00B8DB] hover:bg-[#00B8DB] hover:text-background"
-        >
-          See my work ↓
-        </LinkButton>
       </div>
 
       <div className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-muted-foreground">
