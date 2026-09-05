@@ -4,6 +4,8 @@ import Reveal from '@/components/Reveal'
 interface SkillItem {
   name: string
   src?: string
+  /** Short label rendered when there is no icon (e.g. "EJS"). */
+  short?: string
   placeholder?: boolean
 }
 
@@ -19,6 +21,7 @@ const SECTIONS: SkillSection[] = [
       { name: 'HTML', src: 'https://skillicons.dev/icons?i=html' },
       { name: 'CSS', src: 'https://skillicons.dev/icons?i=css' },
       { name: 'JavaScript', src: 'https://skillicons.dev/icons?i=js' },
+      { name: 'TypeScript', src: 'https://skillicons.dev/icons?i=ts' },
       { name: 'PHP', src: 'https://skillicons.dev/icons?i=php' },
     ],
   },
@@ -29,15 +32,22 @@ const SECTIONS: SkillSection[] = [
       { name: 'Tailwind CSS', src: 'https://skillicons.dev/icons?i=tailwind' },
       { name: 'Laravel', src: 'https://skillicons.dev/icons?i=laravel' },
       { name: 'Inertia.js', src: 'https://cdn.simpleicons.org/inertia' },
+      { name: 'Express', src: 'https://skillicons.dev/icons?i=express' },
+      { name: 'EJS', short: 'EJS' },
+      { name: 'Alpine.js', short: 'Al' },
     ],
   },
   {
     title: 'Tools & Platforms',
     items: [
-      { name: 'TBD', placeholder: true },
-      { name: 'TBD', placeholder: true },
-      { name: 'TBD', placeholder: true },
-      { name: 'TBD', placeholder: true },
+      { name: 'Node.js', src: 'https://skillicons.dev/icons?i=nodejs' },
+      { name: 'Vite', src: 'https://skillicons.dev/icons?i=vite' },
+      { name: 'MySQL', src: 'https://skillicons.dev/icons?i=mysql' },
+      { name: 'MongoDB', src: 'https://skillicons.dev/icons?i=mongodb' },
+      { name: 'AWS', src: 'https://skillicons.dev/icons?i=aws' },
+      { name: 'Git', src: 'https://skillicons.dev/icons?i=git' },
+      { name: 'GitHub', src: 'https://skillicons.dev/icons?i=github' },
+      { name: 'Vercel', src: 'https://skillicons.dev/icons?i=vercel' },
     ],
   },
 ]
@@ -75,15 +85,24 @@ function SkillTile({ item }: { item: SkillItem }) {
       playOnce={false}
     >
       <span className="flex items-center gap-2.5">
-        <img
-          src={item.src}
-          alt={`${item.name} logo`}
-          width={24}
-          height={24}
-          loading="lazy"
-          draggable={false}
-          className="size-6"
-        />
+        {item.src ? (
+          <img
+            src={item.src}
+            alt={`${item.name} logo`}
+            width={24}
+            height={24}
+            loading="lazy"
+            draggable={false}
+            className="size-6"
+          />
+        ) : (
+          <span
+            aria-hidden="true"
+            className="flex size-6 items-center justify-center rounded-md bg-muted font-mono text-[0.6rem] font-bold text-[#00B8DB]"
+          >
+            {item.short ?? '?'}
+          </span>
+        )}
         <span className="whitespace-nowrap text-sm font-medium text-foreground">
           {item.name}
         </span>
@@ -101,10 +120,10 @@ export default function Skills() {
             <span className="mr-2 text-muted-foreground">03.</span> My skills
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">What I work with</h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Placeholder section — languages I write, frameworks I build with, and
-            the tools around them.
-          </p>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Pulled from my public repos — the languages I write, the frameworks I
+          build with, and the tools around them.
+        </p>
         </Reveal>
       </section>
 
