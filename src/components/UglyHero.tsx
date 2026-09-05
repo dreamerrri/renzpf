@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import TextType from '@/components/TextType'
 import ProfileBadge from '@/components/ProfileBadge'
 import SpecularButton from '@/components/SpecularButton'
+import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 
-const ROLES = ['Frontend Dev', 'UI Engineer', 'Backend Dev', 'Chill Guy']
+const ROLES = ['Frontend Developer', 'UI Engineer', 'Backend Developer', 'Chill Guy']
 
 function RotatingRole({ words }: { words: string[] }) {
   const [wordIndex, setWordIndex] = useState(0)
@@ -82,14 +83,42 @@ export default function UglyHero() {
         </SpecularButton>
       </div>
 
-      <div className="mt-12 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-muted-foreground">
+      <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-2 font-mono text-xs text-muted-foreground">
         <span>
           <span className="text-[#00B8DB]">●</span> Open to work
         </span>
-        <span>React · TypeScript · Tailwind · Vite</span>
-        <a href="mailto:you@example.com" className="hover:text-[#00B8DB]">
+        <span className="flex items-center gap-5">
+          <a
+            href="https://github.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="transition-colors hover:text-[#00B8DB]"
+          >
+            <GithubLogo size={18} />
+          </a>
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="transition-colors hover:text-[#00B8DB]"
+          >
+            <LinkedinLogo size={18} />
+          </a>
+          <a
+            href="mailto:you@example.com"
+            aria-label="Email"
+            className="transition-colors hover:text-[#00B8DB]"
+          >
+            <EnvelopeSimple size={18} />
+            
+ </a>
+            <a href="mailto:you@example.com" className="hover:text-[#00B8DB]">
           you@example.com
         </a>
+         
+        </span>
       </div>
 
       <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce text-muted-foreground md:block">

@@ -396,13 +396,13 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
         )
       }
 
-      gsap.to(track, {
-        x: () => -getDistance(),
-        ease: 'none',
+      const getHold = () => window.innerHeight * 0.5
+
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: () => '+=' + (getDistance() * 1.5 + window.innerHeight * 0.25),
+          end: () => '+=' + (getHold() + getDistance() + getHold()),
           pin: true,
           scrub: 1.8,
           anticipatePin: 1,
@@ -439,6 +439,24 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
           }
         }
       })
+
+      tl.to(
+        {},
+        {
+          duration: () => Math.max(getHold(), 1),
+        }
+      )
+      tl.to(track, {
+        x: () => -getDistance(),
+        ease: 'none',
+        duration: () => Math.max(getDistance(), 1),
+      })
+      tl.to(
+        {},
+        {
+          duration: () => Math.max(getHold(), 1),
+        }
+      )
     }, section)
 
     return () => ctx.revert()
