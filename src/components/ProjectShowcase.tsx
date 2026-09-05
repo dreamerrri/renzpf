@@ -30,6 +30,7 @@ interface Project {
   tags: string[]
   year: string
   role: string
+  url: string
   details: ProjectDetail[]
 }
 
@@ -47,6 +48,7 @@ const PROJECTS: Project[] = [
     tags: ['React', 'TypeScript', 'D3.js', 'Tailwind', 'WebSockets'],
     year: '2024-2025',
     role: 'Lead Developer',
+    url: 'https://www.google.com',
     details: [
       {
         kicker: 'Overview',
@@ -67,7 +69,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Features',
         heading: 'What it does',
-        body: 'Everything on the dashboard is live, filterable, and shareable — no page reloads, no stale data.',
+        body: 'Everything on the dashboard is live, filterable, and shareable  Eno page reloads, no stale data.',
         items: ['Live-updating charts & heatmaps', 'Drag-and-drop widget layout', 'Saved views & share links', 'Dark / light theming', 'Keyboard-first navigation']
       }
     ]
@@ -77,15 +79,16 @@ const PROJECTS: Project[] = [
     title: 'Techstacks Logify',
     tagline: 'HR/Payroll management system',
     description:
-      'A progressive web app for capturing notes and photos anywhere — fully functional offline, syncs when you reconnect. Swap this placeholder for a real project title, summary, tags, and links.',
+      'A progressive web app for capturing notes and photos anywhere  Efully functional offline, syncs when you reconnect. Swap this placeholder for a real project title, summary, tags, and links.',
     tags: ['React', 'PWA', 'IndexedDB', 'Service Workers', 'Tailwind'],
     year: '2024',
     role: 'Design & Development',
+    url: 'https://www.google.com',
     details: [
       {
         kicker: 'Overview',
         heading: 'Works with zero connection',
-        body: 'Every note is written locally first and synced in the background. Conflict-free merging means you can jot things down on a train, in a basement, or on a hike — nothing is ever lost.',
+        body: 'Every note is written locally first and synced in the background. Conflict-free merging means you can jot things down on a train, in a basement, or on a hike  Enothing is ever lost.',
         stats: [
           { label: 'Offline', value: '100%' },
           { label: 'Install size', value: '<200kb' },
@@ -95,7 +98,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Technologies',
         heading: 'Tech stack',
-        body: 'Built entirely on web platform primitives — no native wrappers, installable from the browser.',
+        body: 'Built entirely on web platform primitives  Eno native wrappers, installable from the browser.',
         items: ['React + TypeScript', 'IndexedDB local storage', 'Service Worker caching', 'Background Sync API', 'Workbox precaching']
       },
       {
@@ -115,6 +118,7 @@ const PROJECTS: Project[] = [
     tags: ['React', 'TypeScript', 'Stripe', 'Tailwind', 'Edge Functions'],
     year: '2024',
     role: 'Frontend Engineer',
+    url: 'https://www.google.com',
     details: [
       {
         kicker: 'Overview',
@@ -149,6 +153,7 @@ const PROJECTS: Project[] = [
     tags: ['React', 'TypeScript', 'CRDTs', 'Canvas API', 'Tailwind'],
     year: '2023',
     role: 'Creative Developer',
+    url: 'https://www.google.com',
     details: [
       {
         kicker: 'Overview',
@@ -274,10 +279,36 @@ function FeaturedCard({ project }: { project: Project }) {
             ))}
           </ul>
 
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs text-[#00B8DB] transition-opacity hover:opacity-80"
+          >
+            Visit live site
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M7 17 17 7M8 7h9v9"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+
           <p className="mt-8 hidden items-center gap-2 font-mono text-xs text-muted-foreground sm:flex">
             Keep scrolling
             <span className="inline-block animate-pulse" aria-hidden="true">
-              →
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M5 12h14m-6-6 6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </span>
           </p>
         </div>
@@ -469,7 +500,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
     <section
       ref={sectionRef}
       className={`relative z-10 overflow-hidden ${reducedMotion ? '' : 'h-svh'}`}
-      aria-label={`${project.title} — project ${projectNumber} of ${totalProjects}`}
+      aria-label={`${project.title}  Eproject ${projectNumber} of ${totalProjects}`}
     >
       <div
         ref={innerRef}
@@ -525,7 +556,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
 
         {!reducedMotion && (
           <p className="px-6 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground md:px-12">
-            Scroll ↓ to move through {project.title} · {project.index} /{' '}
+            Scroll ↁEto move through {project.title} · {project.index} /{' '}
             {String(totalProjects).padStart(2, '0')}
           </p>
         )}
@@ -554,7 +585,7 @@ export default function ProjectShowcase() {
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Four projects, each with the full story — keep scrolling and each showcase pans
+            Four projects, each with the full story  Ekeep scrolling and each showcase pans
             sideways through its details before handing you back to the next one.
           </p>
         </Reveal>
