@@ -2,7 +2,11 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative z-[1200] border-t border-border">
+    <footer className="relative z-[1200]">
+      <div
+        aria-hidden="true"
+        className="h-px bg-gradient-to-r from-transparent via-border to-transparent"
+      />
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 pb-12">
         <p className="font-mono text-xs text-muted-foreground">
           © {year} <span className="text-foreground">Andrew</span> — All rights reserved.
