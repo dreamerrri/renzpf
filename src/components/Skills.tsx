@@ -18,11 +18,11 @@ const SECTIONS: SkillSection[] = [
   {
     title: 'Languages',
     items: [
-      { name: 'HTML', src: 'https://skillicons.dev/icons?i=html' },
-      { name: 'CSS', src: 'https://skillicons.dev/icons?i=css' },
       { name: 'JavaScript', src: 'https://skillicons.dev/icons?i=js' },
-      { name: 'TypeScript', src: 'https://skillicons.dev/icons?i=ts' },
       { name: 'PHP', src: 'https://skillicons.dev/icons?i=php' },
+      { name: 'TypeScript', src: 'https://skillicons.dev/icons?i=ts' },
+      { name: 'CSS', src: 'https://skillicons.dev/icons?i=css' },
+      { name: 'HTML', src: 'https://skillicons.dev/icons?i=html' },
     ],
   },
   {
@@ -40,14 +40,15 @@ const SECTIONS: SkillSection[] = [
   {
     title: 'Tools & Platforms',
     items: [
-      { name: 'Node.js', src: 'https://skillicons.dev/icons?i=nodejs' },
+      { name: 'GitHub', src: 'https://skillicons.dev/icons?i=github' },
       { name: 'Vite', src: 'https://skillicons.dev/icons?i=vite' },
+      { name: 'Vercel', src: 'https://skillicons.dev/icons?i=vercel' },
+      { name: 'Railway', src: 'https://cdn.simpleicons.org/railway/black' },
       { name: 'MySQL', src: 'https://skillicons.dev/icons?i=mysql' },
+      { name: 'Node.js', src: 'https://skillicons.dev/icons?i=nodejs' },
       { name: 'MongoDB', src: 'https://skillicons.dev/icons?i=mongodb' },
       { name: 'AWS', src: 'https://skillicons.dev/icons?i=aws' },
       { name: 'Git', src: 'https://skillicons.dev/icons?i=git' },
-      { name: 'GitHub', src: 'https://skillicons.dev/icons?i=github' },
-      { name: 'Vercel', src: 'https://skillicons.dev/icons?i=vercel' },
     ],
   },
 ]

@@ -46,34 +46,34 @@ const PROJECTS: Project[] = [
     title: "Aki's Thrift Shop",
     tagline: 'E-commerce/Inventory system',
     description:
-      'A realtime analytics dashboard that turns raw event streams into clear, interactive visualizations. Swap this placeholder for a real project title, summary, tags, and links.',
-    tags: ['React', 'TypeScript', 'D3.js', 'Tailwind', 'WebSockets'],
+      'Online thrift store with stock-level inventory, hosted product images, and card payments at checkout.',
+    tags: ['Laravel', 'Blade', 'Alpine.js', 'Tailwind', 'MySQL'],
     year: '2024-2025',
     role: 'Lead Developer',
-    url: 'https://www.google.com',
+    url: 'https://github.com/dreamerrri/aki-sys',
     image: 'https://picsum.photos/seed/aki-shop/800/600',
     details: [
       {
         kicker: 'Overview',
-        heading: 'Built for speed at scale',
-        body: 'Designed to render thousands of data points without dropping frames. Data flows in over WebSockets and is batched into animation-friendly updates, keeping the UI at a steady 60fps even under heavy load.',
+        heading: 'Storefront with real inventory',
+        body: 'Every listing tracks variants and stock counts, product photos live on S3, and checkout collects card payments — all covered by a Pest test suite.',
         stats: [
-          { label: 'Latency', value: '<50ms' },
-          { label: 'Data points', value: '10k+' },
-          { label: 'Lighthouse', value: '98' }
+          { label: 'Payments', value: 'PayMongo' },
+          { label: 'Storage', value: 'S3' },
+          { label: 'Tests', value: 'Pest' }
         ]
       },
       {
         kicker: 'Technologies',
         heading: 'Tech stack',
-        body: 'A carefully chosen stack focused on type safety, rendering performance, and developer velocity.',
-        items: ['React 19 + TypeScript', 'D3.js custom charts', 'Tailwind CSS design system', 'WebSocket live feeds', 'Vite + Vitest tooling']
+        body: 'Classic server-rendered Laravel with sprinkles of reactivity where the shop needs it.',
+        items: ['Laravel 11 + Blade', 'Alpine.js interactions', 'Tailwind CSS 3', 'MySQL + Eloquent', 'AWS S3 media storage']
       },
       {
         kicker: 'Features',
         heading: 'What it does',
-        body: 'Everything on the dashboard is live, filterable, and shareable  Eno page reloads, no stale data.',
-        items: ['Live-updating charts & heatmaps', 'Drag-and-drop widget layout', 'Saved views & share links', 'Dark / light theming', 'Keyboard-first navigation']
+        body: 'A complete small-shop loop from browsing to paid order.',
+        items: ['Product catalog & variants', 'Stock-level inventory tracking', 'PayMongo card checkout', 'Order management', 'S3 image uploads']
       }
     ]
   },
@@ -82,34 +82,34 @@ const PROJECTS: Project[] = [
     title: 'Techstacks Logify',
     tagline: 'HR/Payroll management system',
     description:
-      'A progressive web app for capturing notes and photos anywhere  Efully functional offline, syncs when you reconnect. Swap this placeholder for a real project title, summary, tags, and links.',
-    tags: ['React', 'PWA', 'IndexedDB', 'Service Workers', 'Tailwind'],
+      'HR and payroll suite — employee records, attendance, payroll runs, and printable payslips.',
+    tags: ['Laravel', 'Inertia', 'React', 'Tailwind', 'MySQL'],
     year: '2024',
     role: 'Design & Development',
-    url: 'https://www.google.com',
+    url: 'https://github.com/dreamerrri/techstacks',
     image: 'https://picsum.photos/seed/logify-app/800/600',
     details: [
       {
         kicker: 'Overview',
-        heading: 'Works with zero connection',
-        body: 'Every note is written locally first and synced in the background. Conflict-free merging means you can jot things down on a train, in a basement, or on a hike  Enothing is ever lost.',
+        heading: 'Payday without spreadsheets',
+        body: 'Employee records, attendance, and payroll runs live in one place, with printable PDF payslips generated per pay period.',
         stats: [
-          { label: 'Offline', value: '100%' },
-          { label: 'Install size', value: '<200kb' },
-          { label: 'Sync conflicts', value: '0' }
+          { label: 'Payslips', value: 'PDF' },
+          { label: 'Auth', value: 'JWT' },
+          { label: 'Frontend', value: 'React 19' }
         ]
       },
       {
         kicker: 'Technologies',
         heading: 'Tech stack',
-        body: 'Built entirely on web platform primitives  Eno native wrappers, installable from the browser.',
-        items: ['React + TypeScript', 'IndexedDB local storage', 'Service Worker caching', 'Background Sync API', 'Workbox precaching']
+        body: 'Laravel backend with a React SPA feel through Inertia — no separate API to maintain.',
+        items: ['Laravel 12', 'Inertia.js v3 + React 19', 'Tailwind CSS 4', 'MySQL payroll schema', 'DomPDF payslip generation']
       },
       {
         kicker: 'Features',
         heading: 'What it does',
-        body: 'A focused writing experience with just enough structure to keep months of notes organized.',
-        items: ['Markdown & photo entries', 'Full-text local search', 'Tag & timeline organization', 'One-tap install', 'Encrypted cloud backup']
+        body: 'The full HR loop from hire to payday.',
+        items: ['Employee records', 'Payroll runs & PDF payslips', 'Attendance calendar', 'Role-based access', 'Deployed on Railway']
       }
     ]
   },
@@ -118,34 +118,34 @@ const PROJECTS: Project[] = [
     title: 'Frascio',
     tagline: 'E-commerce storefront',
     description:
-      'A headless commerce storefront focused on conversion: instant search, optimistic cart updates, and a checkout flow measured in seconds. Swap this placeholder for a real project title, summary, tags, and links.',
-    tags: ['React', 'TypeScript', 'Stripe', 'Tailwind', 'Edge Functions'],
+      'Motion-rich marketing site built with React 19, shadcn components, and physics-feeling page animation.',
+    tags: ['React', 'TypeScript', 'Tailwind', 'shadcn', 'Motion'],
     year: '2024',
     role: 'Frontend Engineer',
-    url: 'https://www.google.com',
+    url: 'https://github.com/dreamerrri/frascio',
     image: 'https://picsum.photos/seed/frascio-store/800/600',
     details: [
       {
         kicker: 'Overview',
-        heading: 'Checkout without friction',
-        body: 'Cart state updates optimistically, search results stream in as you type, and the entire checkout fits on a single screen. Fewer steps, fewer drop-offs.',
+        heading: 'Motion as a feature',
+        body: 'Route-driven pages with physics-feeling transitions, a shadcn component system, and type-safe code throughout.',
         stats: [
-          { label: 'Checkout time', value: '~40s' },
-          { label: 'Conversion lift', value: '+18%' },
-          { label: 'TTI', value: '1.2s' }
+          { label: 'Stack', value: 'React 19' },
+          { label: 'Styling', value: 'Tailwind 4' },
+          { label: 'Motion', value: '60fps' }
         ]
       },
       {
         kicker: 'Technologies',
         heading: 'Tech stack',
-        body: 'Headless architecture with edge-rendered pages and a fully typed API layer.',
-        items: ['React + TypeScript', 'Stripe payment elements', 'Edge Functions rendering', 'Algolia instant search', 'Tailwind CSS UI kit']
+        body: 'Modern Vite SPA with a design-system foundation.',
+        items: ['React 19 + TypeScript', 'Vite 8 builds', 'Tailwind CSS 4', 'shadcn/ui components', 'Motion page animation']
       },
       {
         kicker: 'Features',
         heading: 'What it does',
-        body: 'A storefront tuned around the details that actually move the numbers.',
-        items: ['Optimistic cart & wishlist', 'Streaming product search', 'Single-screen checkout', 'Guest + saved payments', 'Order tracking portal']
+        body: 'A polished, animated browsing experience end to end.',
+        items: ['Animated page transitions', 'Responsive layouts', 'shadcn component system', 'React Router pages', 'Deployed on Vercel']
       }
     ]
   },
@@ -154,34 +154,34 @@ const PROJECTS: Project[] = [
     title: 'Invoicify',
     tagline: 'Invoice & billing platform',
     description:
-      'A collaborative whiteboard where cursors, comments, and edits appear instantly for every participant. Swap this placeholder for a real project title, summary, tags, and links.',
-    tags: ['React', 'TypeScript', 'CRDTs', 'Canvas API', 'Tailwind'],
+      'Billing workspace for building invoices on validated forms over dense, filterable data tables.',
+    tags: ['Laravel', 'Inertia', 'React', 'TypeScript', 'Tailwind'],
     year: '2023',
     role: 'Creative Developer',
-    url: 'https://www.google.com',
+    url: 'https://github.com/MagicBeans54/Invoicify',
     image: 'https://picsum.photos/seed/invoicify-bill/800/600',
     details: [
       {
         kicker: 'Overview',
-        heading: 'Everyone in the same room',
-        body: 'CRDT-based state replication keeps every session in sync without a central lock. Presence, cursors, and comments render at the canvas layer for buttery-smooth multi-user editing.',
+        heading: 'Invoices without the chaos',
+        body: 'Clients, line items, and statuses managed through dense data tables and strictly validated forms.',
         stats: [
-          { label: 'Sync', value: '<30ms' },
-          { label: 'Max users', value: '50/room' },
-          { label: 'Frame budget', value: '16ms' }
+          { label: 'Tables', value: 'TanStack' },
+          { label: 'Forms', value: 'Zod' },
+          { label: 'UI', value: 'shadcn' }
         ]
       },
       {
         kicker: 'Technologies',
         heading: 'Tech stack',
-        body: 'Low-level canvas rendering paired with conflict-free replicated data types.',
-        items: ['React + TypeScript', 'Yjs CRDT documents', 'Canvas 2D renderer', 'WebRTC data channels', 'Tailwind CSS interface']
+        body: 'Laravel + Inertia with a TypeScript React frontend.',
+        items: ['Laravel 12 + Inertia v3', 'React 19 + TypeScript', 'Tailwind CSS 4', 'TanStack Table', 'React Hook Form + Zod']
       },
       {
         kicker: 'Features',
         heading: 'What it does',
-        body: 'Collaboration features that feel native rather than bolted on.',
-        items: ['Live multi-user cursors', 'Threaded canvas comments', 'Infinite pan & zoom canvas', 'Session replay', 'Export to PNG / SVG']
+        body: 'Everything a small billing workflow needs.',
+        items: ['Invoice builder', 'Client management', 'Filterable data tables', 'Validated forms', 'Status tracking']
       }
     ]
   }
@@ -268,21 +268,6 @@ function FeaturedCard({ project }: { project: Project }) {
               />
             </svg>
           </a>
-
-          <p className="mt-8 hidden items-center gap-2 font-mono text-xs text-muted-foreground sm:flex">
-            Keep scrolling
-            <span className="inline-block animate-pulse" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M5 12h14m-6-6 6 6-6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </p>
         </div>
 
         <div className="hidden min-h-0 w-[38%] shrink-0 self-center lg:block">
