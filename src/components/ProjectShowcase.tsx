@@ -31,6 +31,7 @@ interface Project {
   year: string
   role: string
   url: string
+  image: string
   details: ProjectDetail[]
 }
 
@@ -49,6 +50,7 @@ const PROJECTS: Project[] = [
     year: '2024-2025',
     role: 'Lead Developer',
     url: 'https://www.google.com',
+    image: 'https://picsum.photos/seed/aki-shop/800/600',
     details: [
       {
         kicker: 'Overview',
@@ -84,6 +86,7 @@ const PROJECTS: Project[] = [
     year: '2024',
     role: 'Design & Development',
     url: 'https://www.google.com',
+    image: 'https://picsum.photos/seed/logify-app/800/600',
     details: [
       {
         kicker: 'Overview',
@@ -119,6 +122,7 @@ const PROJECTS: Project[] = [
     year: '2024',
     role: 'Frontend Engineer',
     url: 'https://www.google.com',
+    image: 'https://picsum.photos/seed/frascio-store/800/600',
     details: [
       {
         kicker: 'Overview',
@@ -154,6 +158,7 @@ const PROJECTS: Project[] = [
     year: '2023',
     role: 'Creative Developer',
     url: 'https://www.google.com',
+    image: 'https://picsum.photos/seed/invoicify-bill/800/600',
     details: [
       {
         kicker: 'Overview',
@@ -181,7 +186,7 @@ const PROJECTS: Project[] = [
   }
 ]
 
-function MockScreenshot() {
+function MockScreenshot({ src, alt, url }: { src: string; alt: string; url: string }) {
   return (
     <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border bg-muted/50">
       <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
@@ -196,19 +201,24 @@ function MockScreenshot() {
             <span key={i} className="h-2.5 w-10 rounded-sm bg-foreground/10" />
           ))}
         </div>
-        <div className="grid min-h-0 grid-rows-[1fr_auto] gap-3">
-          <div
-            className="min-h-16 rounded-md border border-border"
-            style={{
-              background:
-                'linear-gradient(135deg, rgba(0,184,219,0.35) 0%, rgba(45,212,191,0.18) 45%, rgba(56,189,248,0.08) 100%)'
-            }}
-          />
-          <div className="grid grid-cols-3 gap-2">
-            {[0, 1, 2].map(i => (
-              <span key={i} className="h-8 rounded-md bg-foreground/5" />
-            ))}
-          </div>
+        <div className="min-h-0 overflow-hidden rounded-md border border-border">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${alt} — open live site`}
+            className="block h-full w-full"
+          >
+            <img
+              src={src}
+              alt={alt}
+              width={800}
+              height={600}
+              loading="lazy"
+              draggable={false}
+              className="h-full w-full object-cover"
+            />
+          </a>
         </div>
       </div>
     </div>
@@ -314,7 +324,7 @@ function FeaturedCard({ project }: { project: Project }) {
         </div>
 
         <div className="hidden h-64 min-h-0 w-[38%] shrink-0 lg:block xl:h-80">
-          <MockScreenshot />
+          <MockScreenshot src={project.image} alt={`${project.title} preview`} url={project.url} />
         </div>
       </article>
     </GlowCard>
