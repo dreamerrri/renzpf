@@ -93,7 +93,7 @@ function SkillTile({ item }: { item: SkillItem }) {
 
 export default function Skills() {
   return (
-    <div id="skills" className="relative z-10">
+    <div id="skills" className="skills-band-mask relative z-10 bg-background">
       <section className="mx-auto w-full max-w-6xl px-6 pb-8 pt-24">
         <p className="mb-2 font-mono text-sm text-[#00B8DB]">
           <span className="mr-2 text-muted-foreground">03.</span> My skills

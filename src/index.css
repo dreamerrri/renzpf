@@ -163,6 +163,11 @@
   display: inline-block;
   opacity: 1;
 }
+
+.skills-band-mask {
+  mask-image: linear-gradient(to bottom, transparent, black 64px, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 64px, black 100%);
+}
   ::view-transition-old(root), ::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;
