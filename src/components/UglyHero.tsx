@@ -44,9 +44,9 @@ export default function UglyHero() {
         <span className="mr-2 text-muted-foreground">01.</span> Hi, my name is
       </p>
 
-      <div className="flex items-center justify-between gap-6 md:gap-10">
+      <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-10">
         <div className="min-w-0 flex-1">
-          <h1 className="text-5xl font-black leading-tight text-foreground md:text-7xl">
+          <h1 className="text-5xl font-black leading-tight text-foreground sm:text-6xl md:text-7xl">
             <TextType
               text="Andrew"
               typingSpeed={150}
@@ -66,7 +66,7 @@ export default function UglyHero() {
           dragRange={160}
           photoSrc="/tree.png"
           stickerSrc="/man.png"
-          className="shrink-0"
+          className="shrink-0 self-start md:self-auto"
         />
       </div>
 
