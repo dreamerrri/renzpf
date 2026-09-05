@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BorderGlow from '@/components/BorderGlow'
 import Reveal from '@/components/Reveal'
+import { Safari } from '@/components/ui/safari'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -71,7 +72,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Features',
         heading: 'What it does',
-        body: 'Everything on the dashboard is live, filterable, and shareable  Eno page reloads, no stale data.',
+        body: 'Everything on the dashboard is live, filterable, and shareable  Eno page reloads, no stale data.',
         items: ['Live-updating charts & heatmaps', 'Drag-and-drop widget layout', 'Saved views & share links', 'Dark / light theming', 'Keyboard-first navigation']
       }
     ]
@@ -81,7 +82,7 @@ const PROJECTS: Project[] = [
     title: 'Techstacks Logify',
     tagline: 'HR/Payroll management system',
     description:
-      'A progressive web app for capturing notes and photos anywhere  Efully functional offline, syncs when you reconnect. Swap this placeholder for a real project title, summary, tags, and links.',
+      'A progressive web app for capturing notes and photos anywhere  Efully functional offline, syncs when you reconnect. Swap this placeholder for a real project title, summary, tags, and links.',
     tags: ['React', 'PWA', 'IndexedDB', 'Service Workers', 'Tailwind'],
     year: '2024',
     role: 'Design & Development',
@@ -91,7 +92,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Overview',
         heading: 'Works with zero connection',
-        body: 'Every note is written locally first and synced in the background. Conflict-free merging means you can jot things down on a train, in a basement, or on a hike  Enothing is ever lost.',
+        body: 'Every note is written locally first and synced in the background. Conflict-free merging means you can jot things down on a train, in a basement, or on a hike  Enothing is ever lost.',
         stats: [
           { label: 'Offline', value: '100%' },
           { label: 'Install size', value: '<200kb' },
@@ -101,7 +102,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Technologies',
         heading: 'Tech stack',
-        body: 'Built entirely on web platform primitives  Eno native wrappers, installable from the browser.',
+        body: 'Built entirely on web platform primitives  Eno native wrappers, installable from the browser.',
         items: ['React + TypeScript', 'IndexedDB local storage', 'Service Worker caching', 'Background Sync API', 'Workbox precaching']
       },
       {
@@ -185,45 +186,6 @@ const PROJECTS: Project[] = [
     ]
   }
 ]
-
-function MockScreenshot({ src, alt, url }: { src: string; alt: string; url: string }) {
-  return (
-    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-border bg-muted/50">
-      <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
-        <span className="size-2 rounded-full bg-foreground/20" />
-        <span className="size-2 rounded-full bg-foreground/20" />
-        <span className="size-2 rounded-full bg-foreground/20" />
-        <span className="ml-3 h-4 flex-1 rounded-sm bg-foreground/5" />
-      </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[auto_1fr] gap-3 p-3">
-        <div className="hidden flex-col gap-2 sm:flex">
-          {[0, 1, 2, 3].map(i => (
-            <span key={i} className="h-2.5 w-10 rounded-sm bg-foreground/10" />
-          ))}
-        </div>
-        <div className="min-h-0 overflow-hidden rounded-md border border-border">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${alt} — open live site`}
-            className="block h-full w-full"
-          >
-            <img
-              src={src}
-              alt={alt}
-              width={800}
-              height={600}
-              loading="lazy"
-              draggable={false}
-              className="h-full w-full object-cover"
-            />
-          </a>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 function useIsDark() {
   const [isDark, setIsDark] = useState(() =>
@@ -323,8 +285,16 @@ function FeaturedCard({ project }: { project: Project }) {
           </p>
         </div>
 
-        <div className="hidden h-64 min-h-0 w-[38%] shrink-0 lg:block xl:h-80">
-          <MockScreenshot src={project.image} alt={`${project.title} preview`} url={project.url} />
+        <div className="hidden min-h-0 w-[38%] shrink-0 self-center lg:block">
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${project.title} — open live site`}
+            className="block"
+          >
+            <Safari url={project.url} imageSrc={project.image} />
+          </a>
         </div>
       </article>
     </GlowCard>
@@ -510,7 +480,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
     <section
       ref={sectionRef}
       className={`relative z-10 overflow-hidden ${reducedMotion ? '' : 'h-svh'}`}
-      aria-label={`${project.title}  Eproject ${projectNumber} of ${totalProjects}`}
+      aria-label={`${project.title} — project ${projectNumber} of ${totalProjects}`}
     >
       <div
         ref={innerRef}
@@ -565,9 +535,28 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
         </Reveal>
 
         {!reducedMotion && (
-          <p className="px-6 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground md:px-12">
-            Scroll ↁEto move through {project.title} · {project.index} /{' '}
-            {String(totalProjects).padStart(2, '0')}
+          <p className="flex items-center gap-2 px-6 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground md:px-12">
+            <span>Scroll</span>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              className="animate-bounce"
+            >
+              <path
+                d="M12 5v14m-6-6 6 6 6-6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>
+              to move through {project.title} · {project.index} /{' '}
+              {String(totalProjects).padStart(2, '0')}
+            </span>
           </p>
         )}
       </div>
@@ -595,7 +584,7 @@ export default function ProjectShowcase() {
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Four projects, each with the full story  Ekeep scrolling and each showcase pans
+            Four projects, each with the full story — keep scrolling and each showcase pans
             sideways through its details before handing you back to the next one.
           </p>
         </Reveal>
