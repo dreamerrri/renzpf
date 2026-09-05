@@ -237,7 +237,8 @@ function GlowCard({ children, className = '' }: { children: ReactNode; className
       colors={GLOW_COLORS}
       fillOpacity={isDark ? 0.4 : 0.25}
       borderRadius={20}
-      glowRadius={36}
+      glowRadius={28}
+      coneSpread={14}
       animated={false}
       className={className}
     >

@@ -88,7 +88,7 @@ function ThemeToggle() {
       theme={resolved}
       onThemeChange={t => setTheme(t)}
       duration={600}
-      className="flex size-9 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-[#00B8DB] [&_svg]:size-4"
+      className="flex size-9 cursor-pointer items-center justify-center rounded-md bg-transparent text-muted-foreground transition-colors hover:bg-transparent hover:text-[#00B8DB] [&_svg]:size-4"
     />
   )
 }
@@ -199,8 +199,12 @@ const Navbar = ({ isHome = false }: NavbarProps) => {
       href="/resume.pdf"
       target="_blank"
       rel="noopener noreferrer"
-      className="ml-4 inline-flex h-9 items-center rounded border border-[#00B8DB] px-4 text-xs text-[#00B8DB] transition-colors hover:bg-[#00B8DB] hover:text-background"
+      className="nav-fade-down inline-block px-2.5 py-2.5 text-muted-foreground transition-colors hover:text-[#00B8DB]"
+      style={{ transitionDelay: `${isHome ? NAV_LINKS.length * 100 : 0}ms` }}
     >
+      <span className="mr-[5px] text-left text-[#00B8DB]">
+        {String(NAV_LINKS.length + 1).padStart(2, '0')}.
+      </span>
       Resume
     </a>
   )
@@ -234,9 +238,7 @@ const Navbar = ({ isHome = false }: NavbarProps) => {
                 </li>
               ))}
             </ol>
-            <div className="nav-fade-down" style={{ transitionDelay: `${isHome ? NAV_LINKS.length * 100 : 0}ms` }}>
-              {resumeButton}
-            </div>
+            <div className="relative mx-[5px] text-xs">{resumeButton}</div>
           </div>
 
           <div

@@ -188,14 +188,12 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
       onPointerMove={handlePointerMove}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
-      className={`relative grid isolate border border-border ${className}`}
+      className={`relative grid isolate border ${isDark ? 'border-transparent' : 'border-border'} ${className}`}
       style={{
         background: backgroundColor,
         borderRadius: `${borderRadius}px`,
         transform: 'translate3d(0, 0, 0.01px)',
-        boxShadow: isDark
-          ? 'rgba(0,0,0,0.1) 0 1px 2px, rgba(0,0,0,0.1) 0 2px 4px, rgba(0,0,0,0.1) 0 4px 8px, rgba(0,0,0,0.1) 0 8px 16px, rgba(0,0,0,0.1) 0 16px 32px, rgba(0,0,0,0.1) 0 32px 64px'
-          : 'rgba(15,23,42,0.06) 0 1px 2px, rgba(15,23,42,0.06) 0 4px 12px, rgba(15,23,42,0.08) 0 12px 32px',
+        boxShadow: 'none',
       }}
     >
       <div
