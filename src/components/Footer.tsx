@@ -14,7 +14,7 @@ export default function Footer() {
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0 })}
-          className="font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB]"
+          className="cursor-pointer font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB]"
         >
           Back to top ↑
         </button>
