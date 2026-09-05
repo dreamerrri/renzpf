@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BorderGlow from '@/components/BorderGlow'
+import Reveal from '@/components/Reveal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -506,19 +507,21 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
           </div>
         </header>
 
-        <div
-          ref={trackRef}
-          className={`${
-            reducedMotion
-              ? 'flex flex-col gap-6'
-              : 'flex min-h-0 flex-1 items-stretch gap-5 will-change-transform md:gap-7'
-          } px-6 md:px-12`}
-        >
-          <FeaturedCard project={project} />
-          {project.details.map(detail => (
-            <DetailCard key={detail.kicker} project={project} detail={detail} />
-          ))}
-        </div>
+        <Reveal className="flex min-h-0 flex-1 flex-col justify-center">
+          <div
+            ref={trackRef}
+            className={`${
+              reducedMotion
+                ? 'flex flex-col gap-6'
+                : 'flex min-h-0 flex-1 items-stretch gap-5 will-change-transform md:gap-7'
+            } px-6 md:px-12`}
+          >
+            <FeaturedCard project={project} />
+            {project.details.map(detail => (
+              <DetailCard key={detail.kicker} project={project} detail={detail} />
+            ))}
+          </div>
+        </Reveal>
 
         {!reducedMotion && (
           <p className="px-6 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground md:px-12">
@@ -545,14 +548,16 @@ export default function ProjectShowcase() {
   return (
     <div id="work" className="relative z-10">
       <section className="mx-auto w-full max-w-6xl px-6 pb-8 pt-24">
-        <p className="mb-2 font-mono text-sm text-[#00B8DB]">
-          <span className="mr-2 text-muted-foreground">02.</span> My work
-        </p>
-        <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Four projects, each with the full story — keep scrolling and each showcase pans
-          sideways through its details before handing you back to the next one.
-        </p>
+        <Reveal>
+          <p className="mb-2 font-mono text-sm text-[#00B8DB]">
+            <span className="mr-2 text-muted-foreground">02.</span> My work
+          </p>
+          <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Four projects, each with the full story — keep scrolling and each showcase pans
+            sideways through its details before handing you back to the next one.
+          </p>
+        </Reveal>
       </section>
 
       {PROJECTS.map((project, i) => (

@@ -1,4 +1,5 @@
 import GlareHover from '@/components/GlareHover'
+import Reveal from '@/components/Reveal'
 
 interface SkillItem {
   name: string
@@ -95,19 +96,21 @@ export default function Skills() {
   return (
     <div id="skills" className="skills-band-mask relative z-10 bg-background">
       <section className="mx-auto w-full max-w-6xl px-6 pb-8 pt-24">
-        <p className="mb-2 font-mono text-sm text-[#00B8DB]">
-          <span className="mr-2 text-muted-foreground">03.</span> My skills
-        </p>
-        <h2 className="text-3xl font-bold text-foreground md:text-4xl">What I work with</h2>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Placeholder section — languages I write, frameworks I build with, and
-          the tools around them.
-        </p>
+        <Reveal>
+          <p className="mb-2 font-mono text-sm text-[#00B8DB]">
+            <span className="mr-2 text-muted-foreground">03.</span> My skills
+          </p>
+          <h2 className="text-3xl font-bold text-foreground md:text-4xl">What I work with</h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Placeholder section — languages I write, frameworks I build with, and
+            the tools around them.
+          </p>
+        </Reveal>
       </section>
 
       <section className="mx-auto w-full max-w-6xl space-y-10 px-6 pb-24">
-        {SECTIONS.map(section => (
-          <div key={section.title}>
+        {SECTIONS.map((section, si) => (
+          <Reveal key={section.title} delay={si * 100}>
             <p className="mb-4 font-mono text-xs uppercase tracking-widest text-[#00B8DB]">
               {section.title}
             </p>
@@ -116,7 +119,7 @@ export default function Skills() {
                 <SkillTile key={`${item.name}-${i}`} item={item} />
               ))}
             </div>
-          </div>
+          </Reveal>
         ))}
       </section>
     </div>
