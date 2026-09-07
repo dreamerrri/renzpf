@@ -227,8 +227,8 @@ function GlowCard({ children, className = '' }: { children: ReactNode; className
 
 function FeaturedCard({ project }: { project: Project }) {
   return (
-    <GlowCard className="project-card h-full w-[92vw] max-w-[1150px] shrink-0 md:w-[86vw]">
-      <article className="flex h-full min-h-0 flex-col justify-center gap-6 p-7 md:p-12 lg:flex-row lg:items-center lg:gap-12">
+    <GlowCard className="project-card h-auto w-[85vw] max-w-[1150px] shrink-0 self-center md:h-full md:w-[86vw] md:self-auto">
+      <article className="flex h-auto flex-col justify-center gap-4 p-6 md:h-full md:min-h-0 md:gap-6 md:p-12 lg:flex-row lg:items-center lg:gap-12">
         <div className="min-w-0 flex-1">
           <div className="mb-4 flex items-center justify-between">
             <FolderIcon />
@@ -304,8 +304,8 @@ function FolderIcon() {
 
 function DetailCard({ project, detail }: { project: Project; detail: ProjectDetail }) {
   return (
-    <GlowCard className="project-card h-full w-[86vw] shrink-0 sm:w-[70vw] md:w-[420px] xl:w-[460px]">
-      <article className="flex h-full min-h-0 flex-col p-7 md:p-9">
+    <GlowCard className="project-card h-auto w-[78vw] shrink-0 self-center sm:w-[70vw] md:h-full md:w-[420px] md:self-auto xl:w-[460px]">
+      <article className="flex h-auto flex-col p-6 md:h-full md:min-h-0 md:p-9">
         <div className="mb-6 flex items-center justify-between">
           <span className="font-mono text-xs uppercase tracking-widest text-[#00B8DB]">
             {detail.kicker}
@@ -317,7 +317,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{detail.body}</p>
 
         {detail.stats && (
-          <dl className="mt-auto grid grid-cols-3 gap-3 pt-8">
+          <dl className="mt-6 grid grid-cols-3 gap-3 pt-6 md:mt-auto md:pt-8">
             {detail.stats.map(stat => (
               <div key={stat.label} className="rounded-lg border border-border bg-muted/50 p-3">
                 <dt className="font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">
@@ -330,7 +330,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         )}
 
         {detail.items && (
-          <ul className="mt-auto space-y-2.5 pt-8 font-mono text-xs text-foreground/90 md:text-sm">
+          <ul className="mt-6 space-y-2.5 pt-6 font-mono text-xs text-foreground/90 md:mt-auto md:pt-8 md:text-sm">
             {detail.items.map(item => (
               <li key={item} className="flex items-start gap-2.5">
                 <span className="mt-[0.45em] block size-1.5 shrink-0 rounded-full bg-[#00B8DB]" />
@@ -472,7 +472,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
         className={
           reducedMotion
             ? 'mx-auto flex w-full max-w-7xl flex-col gap-8 px-0 py-24'
-            : 'flex h-full min-h-0 flex-col justify-center gap-5 py-20 will-change-transform md:gap-7 md:py-24'
+            : 'flex h-full min-h-0 flex-col justify-center gap-4 py-10 will-change-transform md:gap-7 md:py-24'
         }
       >
         <header className="flex items-end justify-between gap-4 px-6 md:px-12">
@@ -503,13 +503,13 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
           </div>
         </header>
 
-        <Reveal className="flex min-h-0 flex-1 flex-col justify-center">
+        <Reveal className="flex min-h-0 flex-none flex-col justify-center md:flex-1">
           <div
             ref={trackRef}
             className={`${
               reducedMotion
                 ? 'flex flex-col gap-6'
-                : 'flex min-h-0 flex-1 items-stretch gap-5 will-change-transform md:gap-7'
+                : 'flex min-h-0 flex-none items-center gap-5 will-change-transform md:flex-1 md:items-stretch md:gap-7'
             } px-6 md:px-12`}
           >
             <FeaturedCard project={project} />
