@@ -78,7 +78,11 @@ export default function UglyHero() {
       
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
-        <SpecularButton lineColor={ACCENT} className="mt-0">
+        <SpecularButton
+          lineColor={ACCENT}
+          className="mt-0"
+          onClick={() => (window.location.href = 'mailto:you@example.com')}
+        >
           Get in touch
         </SpecularButton>
       </div>
