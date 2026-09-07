@@ -255,6 +255,21 @@ function FeaturedCard({ project }: { project: Project }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${project.title} — open live site`}
+            className="mt-5 block overflow-hidden rounded-xl border border-border lg:hidden"
+          >
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover object-top"
+            />
+          </a>
+
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs text-[#00B8DB] transition-opacity hover:opacity-80"
           >
             Visit live site
