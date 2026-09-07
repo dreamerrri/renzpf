@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
     year: '2024-2025',
     role: 'Lead Developer',
     url: 'https://github.com/dreamerrri/aki-sys',
-    image: 'https://picsum.photos/seed/aki-shop/800/600',
+    image: '/akisthrift.png',
     details: [
       {
         kicker: 'Overview',
@@ -87,7 +87,7 @@ const PROJECTS: Project[] = [
     year: '2024',
     role: 'Design & Development',
     url: 'https://github.com/dreamerrri/techstacks',
-    image: 'https://picsum.photos/seed/logify-app/800/600',
+    image: '/logify.png',
     details: [
       {
         kicker: 'Overview',
@@ -123,7 +123,7 @@ const PROJECTS: Project[] = [
     year: '2024',
     role: 'Frontend Engineer',
     url: 'https://github.com/dreamerrri/frascio',
-    image: 'https://picsum.photos/seed/frascio-store/800/600',
+    image: '/frascio.png',
     details: [
       {
         kicker: 'Overview',
@@ -157,9 +157,9 @@ const PROJECTS: Project[] = [
       'Billing workspace for building invoices on validated forms over dense, filterable data tables.',
     tags: ['Laravel', 'Inertia', 'React', 'TypeScript', 'Tailwind'],
     year: '2023',
-    role: 'Creative Developer',
+    role: 'Developer',
     url: 'https://github.com/MagicBeans54/Invoicify',
-    image: 'https://picsum.photos/seed/invoicify-bill/800/600',
+    image: '/invoicify.png',
     details: [
       {
         kicker: 'Overview',

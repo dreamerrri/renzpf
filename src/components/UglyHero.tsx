@@ -81,7 +81,7 @@ export default function UglyHero() {
         <SpecularButton
           lineColor={ACCENT}
           className="mt-0"
-          onClick={() => (window.location.href = 'mailto:you@example.com')}
+          onClick={() => (window.location.href = 'mailto:andrewrennn@gmail.com')}
         >
           Get in touch
         </SpecularButton>
@@ -93,7 +93,7 @@ export default function UglyHero() {
         </span>
         <span className="flex items-center gap-5">
           <a
-            href="https://github.com/"
+            href="https://github.com/dreamerrri"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -111,15 +111,15 @@ export default function UglyHero() {
             <LinkedinLogo size={18} />
           </a>
           <a
-            href="mailto:you@example.com"
+            href="mailto:andrewrennn@gmail.com"
             aria-label="Email"
             className="transition-colors hover:text-[#00B8DB]"
           >
             <EnvelopeSimple size={18} />
             
  </a>
-            <a href="mailto:you@example.com" className="hover:text-[#00B8DB]">
-          you@example.com
+            <a href="mailto:andrewrennn@gmail.com" className="hover:text-[#00B8DB]">
+          andrewrennn@gmail.com
         </a>
          
         </span>

@@ -26,14 +26,14 @@ export default function Footer() {
             <SpecularButton
               lineColor="#00B8DB"
               size="md"
-              onClick={() => (window.location.href = 'mailto:you@example.com')}
+              onClick={() => (window.location.href = 'mailto:andrewrennn@gmail.com')}
             >
-              you@example.com
+              andrewrennn@gmail.com
             </SpecularButton>
           </div>
           <div className="mt-6 flex items-center justify-center gap-6 text-muted-foreground">
           <a
-            href="https://github.com/"
+            href="https://github.com/dreamerrri"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -51,7 +51,7 @@ export default function Footer() {
             <LinkedinLogo size={20} />
           </a>
           <a
-            href="mailto:you@example.com"
+            href="mailto:andrewrennn@gmail.com"
             aria-label="Email"
             className="transition-colors hover:text-[#00B8DB]"
           >
