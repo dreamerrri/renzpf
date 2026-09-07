@@ -20,6 +20,7 @@ function useSmoothScroll() {
       lerp: 0.09,
       smoothWheel: true,
     })
+    ;(window as unknown as { __lenis?: Lenis }).__lenis = lenis
     lenis.on('scroll', ScrollTrigger.update)
 
     const tick = (time: number) => {
@@ -31,6 +32,9 @@ function useSmoothScroll() {
 
     return () => {
       gsap.ticker.remove(tick)
+      if ((window as unknown as { __lenis?: Lenis }).__lenis === lenis) {
+        delete (window as unknown as { __lenis?: Lenis }).__lenis
+      }
       lenis.destroy()
     }
   }, [])

@@ -127,7 +127,7 @@
   }
   html {
     @apply font-sans;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 }
 

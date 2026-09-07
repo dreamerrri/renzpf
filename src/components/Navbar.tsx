@@ -17,6 +17,16 @@ const NAV_LINKS: NavLink[] = [
   { name: 'Contact', url: '#contact' }
 ]
 
+function scrollToSection(hash: string) {
+  window.history.replaceState(null, '', hash)
+  const lenis = (window as unknown as { __lenis?: { scrollTo: (t: string, o?: Record<string, unknown>) => void } }).__lenis
+  if (lenis) {
+    lenis.scrollTo(hash, { immediate: true, force: true, offset: -70 })
+  } else {
+    document.querySelector(hash)?.scrollIntoView()
+  }
+}
+
 function useScrollDirection(initialDirection: ScrollDirection): ScrollDirection {
   const [scrollDir, setScrollDir] = useState<ScrollDirection>(initialDirection)
 
@@ -153,7 +163,11 @@ function Menu() {
               <li key={i} className="relative my-1 text-lg">
                 <a
                   href={url}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={e => {
+                    e.preventDefault()
+                    setMenuOpen(false)
+                    scrollToSection(url)
+                  }}
                   className="block w-full px-5 py-1 text-foreground transition-colors hover:text-[#00B8DB]"
                 >
                   <span className="block text-sm text-[#00B8DB]">{String(i + 1).padStart(2, '0')}.</span>
@@ -224,6 +238,10 @@ const Navbar = ({ isHome = false }: NavbarProps) => {
                 <li key={i} className="relative mx-[5px] text-xs">
                   <a
                     href={url}
+                    onClick={e => {
+                      e.preventDefault()
+                      scrollToSection(url)
+                    }}
                     className="nav-fade-down inline-block px-2.5 py-2.5 text-muted-foreground transition-colors hover:text-[#00B8DB]"
                     style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}
                   >

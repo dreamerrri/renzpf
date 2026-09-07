@@ -66,7 +66,14 @@ export default function Footer() {
         </p>
         <button
           type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: Record<string, unknown>) => void } }).__lenis
+            if (lenis) {
+              lenis.scrollTo(0, { immediate: true, force: true })
+            } else {
+              window.scrollTo({ top: 0 })
+            }
+          }}
           className="cursor-pointer font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB]"
         >
           Back to top ↑
