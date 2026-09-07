@@ -1,5 +1,6 @@
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import Reveal from '@/components/Reveal'
+import SpecularButton from '@/components/SpecularButton'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -8,7 +9,7 @@ export default function Footer() {
     <footer id="contact" className="relative z-[1200] scroll-mt-24 bg-background">
       <div
         aria-hidden="true"
-        className="h-px bg-gradient-to-r from-transparent via-[#00B8DB]/50 to-transparent"
+        className="h-px bg-gradient-to-r from-transparent via-[#00B8DB]/40 to-transparent opacity-80"
       />
       <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-16 text-center">
         <Reveal>
@@ -21,12 +22,15 @@ export default function Footer() {
           </p>
         </Reveal>
         <Reveal delay={120}>
-          <a
-            href="mailto:you@example.com"
-            className="mt-6 inline-block rounded-xl border border-[#00B8DB]/40 px-8 py-3 font-mono text-sm text-[#00B8DB] transition-colors hover:bg-[#00B8DB]/10"
-          >
-            you@example.com
-          </a>
+          <div className="mt-8 flex justify-center">
+            <SpecularButton
+              lineColor="#00B8DB"
+              size="md"
+              onClick={() => (window.location.href = 'mailto:you@example.com')}
+            >
+              you@example.com
+            </SpecularButton>
+          </div>
           <div className="mt-6 flex items-center justify-center gap-6 text-muted-foreground">
           <a
             href="https://github.com/"

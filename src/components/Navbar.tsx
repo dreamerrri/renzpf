@@ -47,7 +47,7 @@ function useScrollDirection(initialDirection: ScrollDirection): ScrollDirection 
 
 const Logo = () => (
   <a
-    href="#top"
+    href="/"
     aria-label="home"
     className="font-mono text-lg font-bold tracking-tight text-foreground transition-colors hover:opacity-80"
   >
