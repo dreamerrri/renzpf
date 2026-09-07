@@ -576,7 +576,7 @@ export default function ProjectShowcase() {
   }, [])
 
   return (
-    <div id="work" className="relative z-10">
+    <div id="work" className="relative z-10 scroll-mt-16">
       <section className="mx-auto w-full max-w-6xl px-6 pb-8 pt-24">
         <Reveal>
           <p className="mb-2 font-mono text-sm text-[#00B8DB]">

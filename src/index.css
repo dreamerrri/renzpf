@@ -127,7 +127,8 @@
   }
   html {
     @apply font-sans;
-    }
+    scroll-behavior: smooth;
+  }
 }
 
 @keyframes nav-fade-down {
@@ -162,6 +163,27 @@
   margin-left: 0.25rem;
   display: inline-block;
   opacity: 1;
+}
+
+@keyframes logo-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.logo-cursor {
+  display: inline-block;
+  animation: logo-blink 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-cursor {
+    animation: none;
+  }
 }
 
 .skills-band-mask {

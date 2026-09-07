@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { LinkButton } from '@/components/ui/button'
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 import { useTheme } from '@/components/theme-provider'
-import TextType from '@/components/TextType'
 
 type ScrollDirection = 'up' | 'down'
 
@@ -12,10 +11,10 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { name: 'About', url: '/#about' },
-  { name: 'Experience', url: '/#jobs' },
-  { name: 'Work', url: '/#projects' },
-  { name: 'Contact', url: '/#contact' }
+  { name: 'About', url: '#about' },
+  { name: 'Work', url: '#work' },
+  { name: 'Skills', url: '#skills' },
+  { name: 'Contact', url: '#contact' }
 ]
 
 function useScrollDirection(initialDirection: ScrollDirection): ScrollDirection {
@@ -48,17 +47,13 @@ function useScrollDirection(initialDirection: ScrollDirection): ScrollDirection 
 
 const Logo = () => (
   <a
-    href="/"
+    href="#top"
     aria-label="home"
-    className="font-mono text-lg font-semibold text-foreground transition-colors hover:text-[#00B8DB]"
+    className="font-mono text-lg font-bold tracking-tight text-foreground transition-colors hover:opacity-80"
   >
-    <TextType
-      text="Andrew"
-      typingSpeed={135}
-      initialDelay={200}
-      cursorCharacter="_"
-      cursorBlinkDuration={0.6}
-    />
+    <span className="text-[#00B8DB]">//</span>
+    <span>A</span>
+    <span className="logo-cursor ml-[1px] text-[#00B8DB]">_</span>
   </a>
 )
 

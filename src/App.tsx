@@ -40,7 +40,7 @@ export function App() {
   useSmoothScroll()
 
   return (
-    <div className="relative min-h-svh">
+    <div id="top" className="relative min-h-svh">
 
       <div className="fixed inset-0 z-0" aria-hidden="true">
         <CursorGrid

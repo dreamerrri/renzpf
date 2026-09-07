@@ -39,7 +39,7 @@ const ACCENT = '#00B8DB'
 
 export default function UglyHero() {
   return (
-    <section className="relative z-10 mx-auto flex min-h-svh max-w-5xl flex-col justify-center px-6 md:px-12">
+    <section id="about" className="relative z-10 mx-auto flex min-h-svh max-w-5xl scroll-mt-24 flex-col justify-center px-6 md:px-12">
       <p className="mb-4 font-mono text-sm text-[#00B8DB]">
         <span className="mr-2 text-muted-foreground">01.</span> Hi, my name is
       </p>

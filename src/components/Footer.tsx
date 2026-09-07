@@ -2,7 +2,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative z-[1200] bg-background">
+    <footer id="contact" className="relative z-[1200] scroll-mt-24 bg-background">
       <div
         aria-hidden="true"
         className="h-px bg-gradient-to-r from-transparent via-[#00B8DB]/50 to-transparent"
@@ -13,7 +13,7 @@ export default function Footer() {
         </p>
         <button
           type="button"
-          onClick={() => window.scrollTo({ top: 0 })}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="cursor-pointer font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB]"
         >
           Back to top ↑
