@@ -184,6 +184,42 @@ const PROJECTS: Project[] = [
         items: ['Invoice builder', 'Client management', 'Filterable data tables', 'Validated forms', 'Status tracking']
       }
     ]
+  },
+  {
+    index: '05',
+    title: 'Telemetry',
+    tagline: 'LAN + Cloud push-to-talk',
+    description:
+      'Android walkie-talkie with two transports behind one TalkNet UI — LAN Direct voice with no internet, and Cloud Channels rooms over LiveKit.',
+    tags: ['Kotlin', 'Compose', 'LiveKit', 'WebRTC', 'Workers'],
+    year: '2026',
+    role: 'Solo Developer',
+    url: 'https://github.com/dreamerrri/telemetry',
+    image: 'https://picsum.photos/seed/telemetry-talk/800/600',
+    details: [
+      {
+        kicker: 'Overview',
+        heading: 'Walkie-talkie with two transports',
+        body: 'LAN Direct does phone-to-phone voice over local WiFi with no account, Cloud Channels joins any-word rooms via LiveKit — all audio runs in a foreground service so it keeps talking screen-off.',
+        stats: [
+          { label: 'LAN', value: 'UDP' },
+          { label: 'Cloud', value: 'LiveKit' },
+          { label: 'Audio', value: '16kHz' }
+        ]
+      },
+      {
+        kicker: 'Technologies',
+        heading: 'Tech stack',
+        body: 'Native Android with a tiny Cloudflare token minter — no API secret lives in the app.',
+        items: ['Kotlin + Jetpack Compose M3', 'Foreground service voice + UDP :50005', 'LiveKit Cloud rooms + Opus WebRTC', 'Cloudflare Worker token minter', 'UDP beacons :50006 presence']
+      },
+      {
+        kicker: 'Features',
+        heading: 'What it does',
+        body: 'Hold-to-talk everywhere, from offline LAN to internet rooms.',
+        items: ['Hold-to-talk + volume-key PTT', 'LAN Direct no-internet voice', 'Cloud channels join-by-word', 'NEARBY discovery + quick texts', 'Screen-off service + quality dots']
+      }
+    ]
   }
 ]
 
@@ -584,7 +620,7 @@ export default function ProjectShowcase() {
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Four projects, each with the full story — keep scrolling and each showcase pans
+            Five projects, each with the full story — keep scrolling and each showcase pans
             sideways through its details before handing you back to the next one.
           </p>
         </Reveal>
