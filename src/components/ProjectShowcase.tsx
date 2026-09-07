@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BorderGlow from '@/components/BorderGlow'
 import Reveal from '@/components/Reveal'
 import { Safari } from '@/components/ui/safari'
+import { Iphone } from '@/components/ui/iphone'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -33,6 +34,7 @@ interface Project {
   role: string
   url: string
   image: string
+  device?: 'browser' | 'phone'
   details: ProjectDetail[]
 }
 
@@ -195,7 +197,8 @@ const PROJECTS: Project[] = [
     year: '2026',
     role: 'Solo Developer',
     url: 'https://github.com/dreamerrri/telemetry',
-    image: 'https://picsum.photos/seed/telemetry-talk/800/600',
+    image: '/telemetry.jpg',
+    device: 'phone',
     details: [
       {
         kicker: 'Overview',
@@ -262,6 +265,7 @@ function GlowCard({ children, className = '' }: { children: ReactNode; className
 }
 
 function FeaturedCard({ project }: { project: Project }) {
+  const isPhone = project.device === 'phone'
   return (
     <GlowCard className="project-card h-auto w-[85vw] max-w-[1150px] shrink-0 self-center md:h-full md:w-[86vw] md:self-auto">
       <article className="flex h-auto flex-col justify-center gap-4 p-6 md:h-full md:min-h-0 md:gap-6 md:p-12 lg:flex-row lg:items-center lg:gap-12">
@@ -287,20 +291,34 @@ function FeaturedCard({ project }: { project: Project }) {
             ))}
           </ul>
 
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${project.title} — open live site`}
-            className="mt-5 block overflow-hidden rounded-xl border border-border lg:hidden"
-          >
-            <img
-              src={project.image}
-              alt={`${project.title} preview`}
-              loading="lazy"
-              className="aspect-[16/9] w-full object-cover object-top"
-            />
-          </a>
+          {isPhone ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} — open repository`}
+              className="mt-5 flex justify-center lg:hidden"
+            >
+              <span className="block w-[110px] sm:w-[130px]">
+                <Iphone src={project.image} />
+              </span>
+            </a>
+          ) : (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} — open live site`}
+              className="mt-5 block overflow-hidden rounded-xl border border-border lg:hidden"
+            >
+              <img
+                src={project.image}
+                alt={`${project.title} preview`}
+                loading="lazy"
+                className="aspect-[16/9] w-full object-cover object-top"
+              />
+            </a>
+          )}
 
           <a
             href={project.url}
@@ -308,7 +326,7 @@ function FeaturedCard({ project }: { project: Project }) {
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs text-[#00B8DB] transition-opacity hover:opacity-80"
           >
-            Visit live site
+            {isPhone ? 'View repository' : 'Visit live site'}
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M7 17 17 7M8 7h9v9"
@@ -321,15 +339,21 @@ function FeaturedCard({ project }: { project: Project }) {
           </a>
         </div>
 
-        <div className="hidden min-h-0 w-[38%] shrink-0 self-center lg:block">
+        <div className={`hidden min-h-0 shrink-0 self-center lg:block ${isPhone ? 'w-auto' : 'w-[38%]'}`}>
           <a
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${project.title} — open live site`}
+            aria-label={`${project.title} — ${isPhone ? 'open repository' : 'open live site'}`}
             className="block"
           >
-            <Safari url={project.url} imageSrc={project.image} />
+            {isPhone ? (
+              <span className="block w-[130px] xl:w-[130px]">
+                <Iphone src={project.image} />
+              </span>
+            ) : (
+              <Safari url={project.url} imageSrc={project.image} />
+            )}
           </a>
         </div>
       </article>
