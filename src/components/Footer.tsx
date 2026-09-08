@@ -16,9 +16,9 @@ export default function Footer() {
           <p className="font-mono text-sm text-[#00B8DB]">
             <span className="mr-2 text-muted-foreground">04.</span> Contact
           </p>
-          <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">Get in touch</h2>
+          <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">Open to work — let&apos;s talk</h2>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Open to work — my inbox is always open. I&apos;ll get back to you as soon as I can.
+            Open to work — my inbox is always open.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -28,7 +28,7 @@ export default function Footer() {
               size="md"
               onClick={() => (window.location.href = 'mailto:andrewrennn@gmail.com')}
             >
-              andrewrennn@gmail.com
+              Email me
             </SpecularButton>
           </div>
           <div className="mt-6 flex items-center justify-center gap-6 text-muted-foreground">

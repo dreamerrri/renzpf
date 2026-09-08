@@ -125,8 +125,7 @@ export default function Skills() {
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">What I work with</h2>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Pulled from my public repos — the languages I write, the frameworks I
-          build with, and the tools around them.
+          Pulled from my public repos.
         </p>
         </Reveal>
       </section>

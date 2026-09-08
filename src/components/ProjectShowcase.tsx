@@ -46,10 +46,10 @@ const PROJECTS: Project[] = [
   {
     index: '01',
     title: "Aki's Thrift Shop",
-    tagline: 'E-commerce/Inventory system',
+    tagline: 'E-commerce / Inventory system',
     description:
-      'Online thrift store with stock-level inventory, hosted product images, and card payments at checkout.',
-    tags: ['Laravel', 'Blade', 'Alpine.js', 'Tailwind', 'MySQL'],
+      'Online thrift store — browse variants, track stock live, pay by card.',
+    tags: ['E-commerce', 'Inventory', 'Card payments', 'S3 uploads', 'Pest tested'],
     year: '2024-2025',
     role: 'Lead Developer',
     url: 'https://github.com/dreamerrri/aki-sys',
@@ -57,8 +57,8 @@ const PROJECTS: Project[] = [
     details: [
       {
         kicker: 'Overview',
-        heading: 'Storefront with real inventory',
-        body: 'Every listing tracks variants and stock counts, product photos live on S3, and checkout collects card payments — all covered by a Pest test suite.',
+        heading: 'Stock stays correct at checkout',
+        body: 'Hard part was keeping variant stock consistent through payment — S3 for photos, PayMongo for cards, Pest suite locking it in.',
         stats: [
           { label: 'Payments', value: 'PayMongo' },
           { label: 'Storage', value: 'S3' },
@@ -67,14 +67,14 @@ const PROJECTS: Project[] = [
       },
       {
         kicker: 'Technologies',
-        heading: 'Tech stack',
-        body: 'Classic server-rendered Laravel with sprinkles of reactivity where the shop needs it.',
+        heading: 'Server-rendered Laravel core',
+        body: 'Classic server-rendered Laravel with reactivity only where the shop needs it.',
         items: ['Laravel 11 + Blade', 'Alpine.js interactions', 'Tailwind CSS 3', 'MySQL + Eloquent', 'AWS S3 media storage']
       },
       {
         kicker: 'Features',
-        heading: 'What it does',
-        body: 'A complete small-shop loop from browsing to paid order.',
+        heading: 'Browse to paid order',
+        body: 'Variant stock decrements at payment time, so two buyers can’t checkout the last item.',
         items: ['Product catalog & variants', 'Stock-level inventory tracking', 'PayMongo card checkout', 'Order management', 'S3 image uploads']
       }
     ]
@@ -82,10 +82,10 @@ const PROJECTS: Project[] = [
   {
     index: '02',
     title: 'Techstacks Logify',
-    tagline: 'HR/Payroll management system',
+    tagline: 'HR / Payroll management system',
     description:
-      'HR and payroll suite — employee records, attendance, payroll runs, and printable payslips.',
-    tags: ['Laravel', 'Inertia', 'React', 'Tailwind', 'MySQL'],
+      'HR and payroll in one place — records, attendance, runs, printable payslips.',
+    tags: ['HR', 'Payroll', 'Attendance', 'Payslips', 'Access control'],
     year: '2024',
     role: 'Design & Development',
     url: 'https://github.com/dreamerrri/techstacks',
@@ -94,7 +94,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Overview',
         heading: 'Payday without spreadsheets',
-        body: 'Employee records, attendance, and payroll runs live in one place, with printable PDF payslips generated per pay period.',
+        body: 'Hard part was keeping payroll auditable — one schema for records, attendance and runs, with printable PDF payslips per period.',
         stats: [
           { label: 'Payslips', value: 'PDF' },
           { label: 'Auth', value: 'JWT' },
@@ -103,14 +103,14 @@ const PROJECTS: Project[] = [
       },
       {
         kicker: 'Technologies',
-        heading: 'Tech stack',
-        body: 'Laravel backend with a React SPA feel through Inertia — no separate API to maintain.',
+        heading: 'Laravel with SPA feel',
+        body: 'Laravel backend with a React feel through Inertia — no separate API to maintain.',
         items: ['Laravel 12', 'Inertia.js v3 + React 19', 'Tailwind CSS 4', 'MySQL payroll schema', 'DomPDF payslip generation']
       },
       {
         kicker: 'Features',
-        heading: 'What it does',
-        body: 'The full HR loop from hire to payday.',
+        heading: 'Hire to payday',
+        body: 'Calendar attendance feeds directly into payroll runs — no spreadsheet export step.',
         items: ['Employee records', 'Payroll runs & PDF payslips', 'Attendance calendar', 'Role-based access', 'Deployed on Railway']
       }
     ]
@@ -120,8 +120,8 @@ const PROJECTS: Project[] = [
     title: 'Frascio',
     tagline: 'E-commerce storefront',
     description:
-      'Motion-rich marketing site built with React 19, shadcn components, and physics-feeling page animation.',
-    tags: ['React', 'TypeScript', 'Tailwind', 'shadcn', 'Motion'],
+      'Marketing storefront where every page transition feels physical.',
+    tags: ['Storefront', 'Marketing site', 'Design system', 'Page transitions', 'Responsive'],
     year: '2024',
     role: 'Frontend Engineer',
     url: 'https://github.com/dreamerrri/frascio',
@@ -130,7 +130,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Overview',
         heading: 'Motion as a feature',
-        body: 'Route-driven pages with physics-feeling transitions, a shadcn component system, and type-safe code throughout.',
+        body: 'Hard part was holding 60fps without layout shift — route-driven transitions over a shared component system, fully type-safe.',
         stats: [
           { label: 'Stack', value: 'React 19' },
           { label: 'Styling', value: 'Tailwind 4' },
@@ -139,14 +139,14 @@ const PROJECTS: Project[] = [
       },
       {
         kicker: 'Technologies',
-        heading: 'Tech stack',
+        heading: 'Vite SPA + design system',
         body: 'Modern Vite SPA with a design-system foundation.',
         items: ['React 19 + TypeScript', 'Vite 8 builds', 'Tailwind CSS 4', 'shadcn/ui components', 'Motion page animation']
       },
       {
         kicker: 'Features',
-        heading: 'What it does',
-        body: 'A polished, animated browsing experience end to end.',
+        heading: 'Animated browsing end to end',
+        body: 'Shared layout transitions across pages, responsive from mobile to desktop.',
         items: ['Animated page transitions', 'Responsive layouts', 'shadcn component system', 'React Router pages', 'Deployed on Vercel']
       }
     ]
@@ -156,8 +156,8 @@ const PROJECTS: Project[] = [
     title: 'Invoicify',
     tagline: 'Invoice & billing platform',
     description:
-      'Billing workspace for building invoices on validated forms over dense, filterable data tables.',
-    tags: ['Laravel', 'Inertia', 'React', 'TypeScript', 'Tailwind'],
+      'Billing workspace — build invoices on validated forms over filterable tables.',
+    tags: ['Invoicing', 'Clients', 'Data tables', 'Validated forms', 'Status tracking'],
     year: '2023',
     role: 'Developer',
     url: 'https://github.com/MagicBeans54/Invoicify',
@@ -166,7 +166,7 @@ const PROJECTS: Project[] = [
       {
         kicker: 'Overview',
         heading: 'Invoices without the chaos',
-        body: 'Clients, line items, and statuses managed through dense data tables and strictly validated forms.',
+        body: 'Hard part was keeping dense tables fast and correct — TanStack tables with strictly validated forms for clients, items and statuses.',
         stats: [
           { label: 'Tables', value: 'TanStack' },
           { label: 'Forms', value: 'Zod' },
@@ -175,14 +175,14 @@ const PROJECTS: Project[] = [
       },
       {
         kicker: 'Technologies',
-        heading: 'Tech stack',
+        heading: 'Inertia + TypeScript frontend',
         body: 'Laravel + Inertia with a TypeScript React frontend.',
         items: ['Laravel 12 + Inertia v3', 'React 19 + TypeScript', 'Tailwind CSS 4', 'TanStack Table', 'React Hook Form + Zod']
       },
       {
         kicker: 'Features',
-        heading: 'What it does',
-        body: 'Everything a small billing workflow needs.',
+        heading: 'Small billing workflow',
+        body: 'Zod-validated forms over TanStack tables — fast filtering even on dense invoice lists.',
         items: ['Invoice builder', 'Client management', 'Filterable data tables', 'Validated forms', 'Status tracking']
       }
     ]
@@ -192,8 +192,8 @@ const PROJECTS: Project[] = [
     title: 'Telemetry',
     tagline: 'LAN + Cloud push-to-talk',
     description:
-      'Android walkie-talkie with two transports behind one TalkNet UI — LAN Direct voice with no internet, and Cloud Channels rooms over LiveKit.',
-    tags: ['Kotlin', 'Compose', 'LiveKit', 'WebRTC', 'Workers'],
+      'Android walkie-talkie — push-to-talk over local Wi-Fi with no internet, or join internet rooms with one word.',
+    tags: ['Push-to-talk', 'Offline voice', 'Voice rooms', 'Foreground service', 'Android'],
     year: '2026',
     role: 'Solo Developer',
     url: 'https://github.com/dreamerrri/telemetry',
@@ -202,8 +202,8 @@ const PROJECTS: Project[] = [
     details: [
       {
         kicker: 'Overview',
-        heading: 'Walkie-talkie with two transports',
-        body: 'LAN Direct does phone-to-phone voice over local WiFi with no account, Cloud Channels joins any-word rooms via LiveKit — all audio runs in a foreground service so it keeps talking screen-off.',
+        heading: 'One button, offline or online',
+        body: 'Phone-to-phone voice over local Wi-Fi with no account, or join-by-word internet rooms — audio runs as a foreground service so it keeps talking screen-off.',
         stats: [
           { label: 'LAN', value: 'UDP' },
           { label: 'Cloud', value: 'LiveKit' },
@@ -212,14 +212,14 @@ const PROJECTS: Project[] = [
       },
       {
         kicker: 'Technologies',
-        heading: 'Tech stack',
+        heading: 'Native Android + cloud minter',
         body: 'Native Android with a tiny Cloudflare token minter — no API secret lives in the app.',
         items: ['Kotlin + Jetpack Compose M3', 'Foreground service voice + UDP :50005', 'LiveKit Cloud rooms + Opus WebRTC', 'Cloudflare Worker token minter', 'UDP beacons :50006 presence']
       },
       {
         kicker: 'Features',
-        heading: 'What it does',
-        body: 'Hold-to-talk everywhere, from offline LAN to internet rooms.',
+        heading: 'Hold-to-talk everywhere',
+        body: 'Volume-button push-to-talk that keeps running screen-off, with signal dots for quality.',
         items: ['Hold-to-talk + volume-key PTT', 'LAN Direct no-internet voice', 'Cloud channels join-by-word', 'NEARBY discovery + quick texts', 'Screen-off service + quality dots']
       }
     ]
@@ -273,7 +273,7 @@ function FeaturedCard({ project }: { project: Project }) {
           <div className="mb-4 flex items-center justify-between">
             <FolderIcon />
             <span className="font-mono text-xs text-muted-foreground">
-              {project.index} / {project.year} · {project.role}
+              Featured
             </span>
           </div>
 
@@ -552,9 +552,8 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
       >
         <header className="flex items-end justify-between gap-4 px-6 md:px-12">
           <div className="min-w-0">
-            <p className="font-mono text-sm text-[#00B8DB]">
-              <span className="mr-2 text-muted-foreground">{project.index}.</span>
-              {project.tagline}
+            <p className="font-mono text-sm text-muted-foreground">
+              {project.index} / {project.year} · {project.role}
             </p>
             <h2 className="truncate text-2xl font-bold text-foreground md:text-4xl">
               {project.title}
@@ -603,7 +602,6 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
-              className="animate-bounce"
             >
               <path
                 d="M12 5v14m-6-6 6 6 6-6"
@@ -614,8 +612,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
               />
             </svg>
             <span>
-              to move through {project.title} · {project.index} /{' '}
-              {String(totalProjects).padStart(2, '0')}
+              to explore {project.title} details
             </span>
           </p>
         )}
@@ -644,8 +641,7 @@ export default function ProjectShowcase() {
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Five projects, each with the full story — keep scrolling and each showcase pans
-            sideways through its details before handing you back to the next one.
+            Five shipped projects — each pans sideways to show outcome, stack, and code.
           </p>
         </Reveal>
       </section>

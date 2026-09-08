@@ -112,20 +112,16 @@ export default function UglyHero() {
           </a>
           <a
             href="mailto:andrewrennn@gmail.com"
-            aria-label="Email"
-            className="transition-colors hover:text-[#00B8DB]"
+            aria-label="Email andrewrennn@gmail.com"
+            className="flex items-center gap-2 transition-colors hover:text-[#00B8DB]"
           >
             <EnvelopeSimple size={18} />
-            
- </a>
-            <a href="mailto:andrewrennn@gmail.com" className="hover:text-[#00B8DB]">
-          andrewrennn@gmail.com
-        </a>
-         
+            andrewrennn@gmail.com
+          </a>
         </span>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce text-muted-foreground md:block">
+      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 text-muted-foreground md:block">
         <svg width="20" height="32" viewBox="0 0 20 32" fill="none" aria-hidden="true">
           <rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" strokeWidth="2" />
           <circle cx="10" cy="9" r="3" fill="currentColor" />
