@@ -50,12 +50,12 @@ export function App() {
         <CursorGrid
           cellSize={70}
           color="#00B8DB"
-          radius={140}
+          radius={120}
           falloff="smooth"
           holdTime={400}
           fadeDuration={800}
-          lineWidth={1.2}
-          maxOpacity={1}
+          lineWidth={1}
+          maxOpacity={0.6}
           fillOpacity={0}
           gridOpacity={0}
           cellRadius={0}

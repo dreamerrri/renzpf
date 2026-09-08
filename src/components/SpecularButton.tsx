@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, type CSSProperties, type ReactNode, type MouseEventHandler } from 'react';
+import { useRef, useEffect, useState, type CSSProperties, type ReactNode, type MouseEventHandler, type Ref } from 'react';
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
 
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -22,7 +22,10 @@ export interface SpecularButtonProps {
   proximity?: number;
   autoAnimate?: boolean;
   disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  href?: string;
+  target?: string;
+  rel?: string;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
 }
@@ -127,10 +130,13 @@ const SpecularButton = ({
   autoAnimate = false,
   disabled = false,
   onClick,
+  href,
+  target,
+  rel,
   className = '',
   type = 'button'
 }: SpecularButtonProps) => {
-  const btnRef = useRef<HTMLButtonElement>(null);
+  const btnRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const fxRef = useRef<HTMLSpanElement>(null);
   const propsRef = useRef<ShaderProps>({} as ShaderProps);
   const [isDark, setIsDark] = useState(() =>
@@ -279,22 +285,40 @@ const SpecularButton = ({
     };
   }, []);
 
+  const buttonClassName = `relative m-0 inline-flex cursor-pointer items-center justify-center border-none font-medium leading-none tracking-[0.01em] outline-none transition-transform duration-150 active:scale-[0.97] disabled:cursor-default disabled:opacity-55 disabled:active:scale-100 [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] [backdrop-filter:blur(var(--sb-blur))] ${isDark ? 'shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.25)]' : 'shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_8px_24px_rgba(15,23,42,0.12)]'} focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00B8DB] ${SIZES[size] || SIZES.md}${className ? ` ${className}` : ''}`;
+  const buttonStyle = {
+    '--sb-radius': `${radius}px`,
+    '--sb-tint': tint,
+    '--sb-tint-opacity': tintOpacity,
+    '--sb-blur': `${blur}px`,
+    '--sb-text-color': resolvedTextColor
+  } as CSSProperties;
+
+  if (href && !disabled) {
+    return (
+      <a
+        ref={btnRef as Ref<HTMLAnchorElement>}
+        href={href}
+        target={target}
+        rel={rel}
+        onClick={onClick}
+        className={buttonClassName}
+        style={buttonStyle}
+      >
+        <span ref={fxRef} aria-hidden="true" className="pointer-events-none absolute -inset-5 z-[1] [&_canvas]:block [&_canvas]:h-full [&_canvas]:w-full" />
+        <span className="relative z-[2]">{children}</span>
+      </a>
+    );
+  }
+
   return (
     <button
-      ref={btnRef}
+      ref={btnRef as Ref<HTMLButtonElement>}
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`relative m-0 inline-flex cursor-pointer items-center justify-center border-none font-medium leading-none tracking-[0.01em] outline-none transition-transform duration-150 active:scale-[0.97] disabled:cursor-default disabled:opacity-55 disabled:active:scale-100 [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] [backdrop-filter:blur(var(--sb-blur))] ${isDark ? 'shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.25)]' : 'shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_8px_24px_rgba(15,23,42,0.12)]'} focus-visible:outline-2 focus-visible:outline-offset-[3px] ${SIZES[size] || SIZES.md}${className ? ` ${className}` : ''}`}
-      style={
-        {
-          '--sb-radius': `${radius}px`,
-          '--sb-tint': tint,
-          '--sb-tint-opacity': tintOpacity,
-          '--sb-blur': `${blur}px`,
-          '--sb-text-color': resolvedTextColor
-        } as CSSProperties
-      }
+      className={buttonClassName}
+      style={buttonStyle}
     >
       <span ref={fxRef} aria-hidden="true" className="pointer-events-none absolute -inset-5 z-[1] [&_canvas]:block [&_canvas]:h-full [&_canvas]:w-full" />
       <span className="relative z-[2]">{children}</span>
