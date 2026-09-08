@@ -129,6 +129,11 @@
     @apply font-sans;
     scroll-behavior: auto;
   }
+  section[id],
+  footer[id],
+  div[id="top"] {
+    scroll-margin-top: 88px;
+  }
 }
 
 @keyframes nav-fade-down {
