@@ -1,9 +1,30 @@
-import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
+import { GithubLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import Reveal from '@/components/Reveal'
 import SpecularButton from '@/components/SpecularButton'
 
+const EMAIL = 'andrewrennn@gmail.com'
+
 export default function Footer() {
   const year = new Date().getFullYear()
+  
+
+  const backToTop = () => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const lenis = (
+      window as unknown as {
+        __lenis?: { scrollTo: (t: number, o?: Record<string, unknown>) => void }
+      }
+    ).__lenis
+    if (lenis) {
+      if (reduced) {
+        lenis.scrollTo(0, { immediate: true, force: true })
+      } else {
+        lenis.scrollTo(0)
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
+    }
+  }
 
   return (
     <footer id="contact" className="relative z-[1200] scroll-mt-24 bg-background">
@@ -16,9 +37,10 @@ export default function Footer() {
           <p className="font-mono text-sm text-[#00B8DB]">
             <span className="mr-2 text-muted-foreground">04.</span> Contact
           </p>
-          <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">Get in touch</h2>
+          <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">Open to work — let&apos;s talk</h2>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Open to work — my inbox is always open. I&apos;ll get back to you as soon as I can.
+            I reply within 24 hours — tell me the role and timeline, and I&apos;ll walk
+            through the repo.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -26,55 +48,44 @@ export default function Footer() {
             <SpecularButton
               lineColor="#00B8DB"
               size="md"
-              onClick={() => (window.location.href = 'mailto:andrewrennn@gmail.com')}
+              href={`mailto:${EMAIL}`}
             >
-              andrewrennn@gmail.com
+              Email me
             </SpecularButton>
           </div>
-          <div className="mt-6 flex items-center justify-center gap-6 text-muted-foreground">
-          <a
-            href="https://github.com/dreamerrri"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="transition-colors hover:text-[#00B8DB]"
-          >
-            <GithubLogo size={20} />
-          </a>
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="transition-colors hover:text-[#00B8DB]"
-          >
-            <LinkedinLogo size={20} />
-          </a>
-          <a
-            href="mailto:andrewrennn@gmail.com"
-            aria-label="Email"
-            className="transition-colors hover:text-[#00B8DB]"
-          >
-            <EnvelopeSimple size={20} />
-          </a>
+          
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-muted-foreground">
+            <a
+              href="https://github.com/dreamerrri"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub — open profile"
+              className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 py-2 font-mono text-xs transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+            >
+              <GithubLogo size={20} />
+              GitHub
+            </a>
+            {/* LinkedIn removed until a real profile URL is confirmed — generic linkedin.com/ fails silently. */}
+            <a
+              href={`mailto:${EMAIL}`}
+              aria-label={`Email ${EMAIL}`}
+              className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md px-3 py-2 font-mono text-xs transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+            >
+              <EnvelopeSimple size={20} className="shrink-0" />
+              <span className="break-all">Email</span>
+            </a>
           </div>
         </Reveal>
       </div>
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8">
         <p className="font-mono text-xs text-muted-foreground">
-          © {year} <span className="text-foreground">Andrew</span> — All rights reserved.
+          © {year} <span className="text-[#00B8DB]">//A_</span> — built fast, accessible,
+          detail-obsessed.
         </p>
         <button
           type="button"
-          onClick={() => {
-            const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: Record<string, unknown>) => void } }).__lenis
-            if (lenis) {
-              lenis.scrollTo(0, { immediate: true, force: true })
-            } else {
-              window.scrollTo({ top: 0 })
-            }
-          }}
-          className="cursor-pointer font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB]"
+          onClick={backToTop}
+          className="rounded-md font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
         >
           Back to top ↑
         </button>

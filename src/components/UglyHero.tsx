@@ -5,34 +5,71 @@ import SpecularButton from '@/components/SpecularButton'
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 
 const ROLES = ['Frontend Developer', 'UI Engineer', 'Backend Developer', 'Chill Guy']
+const LONGEST_ROLE_CH = Math.max(...ROLES.map(r => r.length))
 
 function RotatingRole({ words }: { words: string[] }) {
   const [wordIndex, setWordIndex] = useState(0)
   const [subIndex, setSubIndex] = useState(0)
   const [deleting, setDeleting] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
 
   useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReducedMotion(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion || paused) return
     const current = words[wordIndex % words.length]
     let t: number
 
     if (!deleting && subIndex === current.length) {
-      t = setTimeout(() => setDeleting(true), 1600)
+      t = window.setTimeout(() => setDeleting(true), 1600)
     } else if (deleting && subIndex === 0) {
-      t = setTimeout(() => {
+      t = window.setTimeout(() => {
         setDeleting(false)
         setWordIndex(i => (i + 1) % words.length)
       }, 60)
     } else {
-      t = setTimeout(
+      t = window.setTimeout(
         () => setSubIndex(s => s + (deleting ? -1 : 1)),
         deleting ? 40 : 90
       )
     }
 
-    return () => clearTimeout(t)
-  }, [deleting, subIndex, wordIndex, words])
+    return () => window.clearTimeout(t)
+  }, [deleting, subIndex, wordIndex, words, paused, reducedMotion])
 
-  return <span className="text-[#00B8DB]">{words[wordIndex % words.length].slice(0, subIndex)}</span>
+  if (reducedMotion) {
+    return (
+      <span aria-live="polite" className="inline-block text-[#00B8DB]" style={{ minWidth: `${LONGEST_ROLE_CH}ch` }}>
+        {words[0]}
+      </span>
+    )
+  }
+
+  const currentWord = words[wordIndex % words.length]
+
+  return (
+    <span
+      aria-live="polite"
+      aria-atomic="true"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      className="inline-block text-[#00B8DB]"
+      style={{ minWidth: `${LONGEST_ROLE_CH}ch` }}
+   
+    >
+      <span aria-hidden="true">{currentWord.slice(0, subIndex)}<span className="animate-pulse motion-reduce:animate-none">|</span></span>
+      <span className="sr-only">{currentWord}</span>
+    </span>
+  )
 }
 
 const ACCENT = '#00B8DB'
@@ -81,47 +118,43 @@ export default function UglyHero() {
         <SpecularButton
           lineColor={ACCENT}
           className="mt-0"
-          onClick={() => (window.location.href = 'mailto:andrewrennn@gmail.com')}
+          href="mailto:andrewrennn@gmail.com"
         >
           Get in touch
         </SpecularButton>
       </div>
 
-      <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-2 font-mono text-xs text-muted-foreground">
-        <span>
-          <span className="text-[#00B8DB]">●</span> Open to work
+      <div className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-3 font-mono text-xs text-muted-foreground">
+        <span className="inline-flex min-h-11 items-center">
+          <span className="text-[#00B8DB]">●</span>&nbsp;Open to work
         </span>
-        <span className="flex items-center gap-5">
+        <span className="flex flex-wrap items-center gap-2">
           <a
             href="https://github.com/dreamerrri"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="transition-colors hover:text-[#00B8DB]"
+            className="flex size-11 items-center justify-center rounded-md transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
           >
-            <GithubLogo size={18} />
+            <GithubLogo size={20} />
           </a>
           <a
             href="https://www.linkedin.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="transition-colors hover:text-[#00B8DB]"
+            className="flex size-11 items-center justify-center rounded-md transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
           >
-            <LinkedinLogo size={18} />
+            <LinkedinLogo size={20} />
           </a>
           <a
             href="mailto:andrewrennn@gmail.com"
-            aria-label="Email"
-            className="transition-colors hover:text-[#00B8DB]"
+            aria-label="Email andrewrennn@gmail.com"
+            className="inline-flex min-h-11 max-w-full items-center gap-2 break-all rounded-md px-2 py-2 transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
           >
-            <EnvelopeSimple size={18} />
-            
- </a>
-            <a href="mailto:andrewrennn@gmail.com" className="hover:text-[#00B8DB]">
-          andrewrennn@gmail.com
-        </a>
-         
+            <EnvelopeSimple size={20} className="shrink-0" />
+            <span className="break-all">andrewrennn@gmail.com</span>
+          </a>
         </span>
       </div>
 

@@ -87,7 +87,7 @@ const GlareHover: React.FC<GlareHoverProps> = ({
 
   return (
     <div
-      className={`relative grid place-items-center overflow-hidden border cursor-pointer ${className}`}
+      className={`relative grid place-items-center overflow-hidden border cursor-default focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB] ${className}`}
       style={{
         width,
         height,
@@ -98,6 +98,8 @@ const GlareHover: React.FC<GlareHoverProps> = ({
       }}
       onMouseEnter={animateIn}
       onMouseLeave={animateOut}
+      onFocus={animateIn}
+      onBlur={animateOut}
     >
       <div ref={overlayRef} style={overlayStyle} />
       {children}

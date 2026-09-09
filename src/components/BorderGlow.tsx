@@ -188,6 +188,8 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
       onPointerMove={handlePointerMove}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
       className={`relative grid isolate border ${isDark ? 'border-transparent' : 'border-border'} ${className}`}
       style={{
         background: backgroundColor,
@@ -249,7 +251,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
           inset: `${-glowRadius}px`,
           maskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
           WebkitMaskImage: `conic-gradient(from ${angleDeg} at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%)`,
-          opacity: glowOpacity * (isDark ? 1 : 0.55),
+          opacity: glowOpacity * (isDark ? 1 : 0.8),
           mixBlendMode: isDark ? 'plus-lighter' : 'normal',
           transition: isVisible ? 'opacity 0.25s ease-out' : 'opacity 0.75s ease-in-out',
         } as React.CSSProperties}
