@@ -18,12 +18,15 @@ type SafariMode = "default" | "simple"
 export interface SafariProps extends HTMLAttributes<HTMLDivElement> {
   url?: string
   imageSrc?: string
+  /** Accessible name for the preview image. */
+  imageAlt?: string
   videoSrc?: string
   mode?: SafariMode
 }
 
 export function Safari({
   imageSrc,
+  imageAlt,
   videoSrc,
   url,
   mode = "default",
@@ -73,12 +76,12 @@ export function Safari({
             top: `${TOP_PCT}%`,
             width: `${WIDTH_PCT}%`,
             height: `${HEIGHT_PCT}%`,
-            borderRadius: "0 0 11px 11px",
+            borderRadius: "0 0 12px 12px",
           }}
         >
           <img
             src={imageSrc}
-            alt=""
+            alt={imageAlt ?? ""}
             className="block size-full object-cover object-top"
           />
         </div>

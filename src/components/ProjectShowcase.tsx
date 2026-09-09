@@ -11,6 +11,57 @@ gsap.registerPlugin(ScrollTrigger)
 const ACCENT = '#00B8DB'
 const GLOW_COLORS = ['#00B8DB', '#2dd4bf', '#38bdf8']
 
+/** Plain-English glosses for stack jargon — surfaced as tooltips. */
+const GLOSS: Record<string, string> = {
+  PayMongo: 'Card payments',
+  S3: 'File hosting (AWS)',
+  Pest: 'PHP test suite',
+  PDF: 'Printable file',
+  JWT: 'Login tokens',
+  'React 19': 'UI library, v19',
+  TanStack: 'Data-grid library',
+  Zod: 'Form validation',
+  shadcn: 'UI components',
+  'Tailwind 4': 'Styling, v4',
+  '60fps': 'Smooth animation',
+  UDP: 'Local-network transport',
+  LiveKit: 'Voice servers',
+  '16kHz': 'Voice quality',
+  'Laravel 11 + Blade': 'PHP framework + templates',
+  'Laravel 12': 'PHP framework, v12',
+  'Laravel 12 + Inertia v3': 'PHP framework + React bridge',
+  'Alpine.js interactions': 'Lightweight interactivity',
+  'Tailwind CSS 3': 'Styling, v3',
+  'Tailwind CSS 4': 'Styling, v4',
+  'MySQL + Eloquent': 'Database + query builder',
+  'MySQL payroll schema': 'Database tables',
+  'AWS S3 media storage': 'File hosting (AWS)',
+  'Inertia.js v3 + React 19': 'Laravel–React bridge',
+  'DomPDF payslip generation': 'PDF generator',
+  'TanStack Table': 'Data-grid library',
+  'React Hook Form + Zod': 'Validated forms',
+  'React 19 + TypeScript': 'UI library + typed JS',
+  'Vite 8 builds': 'Build tool, v8',
+  'Motion page animation': 'Animation library',
+  'shadcn/ui components': 'UI components',
+  'React Router pages': 'Page navigation',
+  'PayMongo card checkout': 'Card payments',
+  'S3 image uploads': 'File hosting (AWS)',
+  'Role-based access': 'Permissions',
+  'Deployed on Railway': 'Hosting',
+  'Deployed on Vercel': 'Hosting',
+  'Kotlin + Jetpack Compose M3': 'Android language + UI toolkit',
+  'Foreground service voice + UDP :50005': 'Background audio; network port',
+  'LiveKit Cloud rooms + Opus WebRTC': 'Voice servers + audio codec',
+  'Cloudflare Worker token minter': 'Login-token server',
+  'UDP beacons :50006 presence': 'Nearby-device signal; network port',
+  'Hold-to-talk + volume-key PTT': 'Push-to-talk button',
+  'LAN Direct no-internet voice': 'Offline voice over Wi-Fi',
+  'Cloud channels join-by-word': 'Internet voice rooms',
+  'NEARBY discovery + quick texts': 'Nearby devices + messages',
+  'Screen-off service + quality dots': 'Background audio + signal',
+}
+
 interface ProjectStat {
   label: string
   value: string
@@ -285,7 +336,7 @@ function FeaturedCard({ project }: { project: Project }) {
             {project.description}
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-[#007A94] dark:text-[#00B8DB]/80">
+          <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-[#007A94] dark:text-[#00B8DB]">
             {project.tags.map(tag => (
               <li key={tag}>{tag}</li>
             ))}
@@ -296,11 +347,11 @@ function FeaturedCard({ project }: { project: Project }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} — open repository`}
-              className="mt-5 flex justify-center lg:hidden"
+            aria-label={`${project.title} — ${isPhone ? 'open repository' : 'open live site'}`}
+              className="mt-5 flex justify-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] lg:hidden"
             >
               <span className="block w-[110px] sm:w-[130px]">
-                <Iphone src={project.image} />
+                <Iphone src={project.image} alt={`${project.title} preview`} />
               </span>
             </a>
           ) : (
@@ -309,7 +360,7 @@ function FeaturedCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} — open live site`}
-              className="mt-5 block overflow-hidden rounded-xl border border-border lg:hidden"
+              className="mt-5 block overflow-hidden rounded-xl border border-border focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] lg:hidden"
             >
               <img
                 src={project.image}
@@ -324,7 +375,7 @@ function FeaturedCard({ project }: { project: Project }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs text-[#00B8DB] transition-opacity hover:opacity-80"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-sm font-mono text-xs text-[#007A94] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] dark:text-[#00B8DB]"
           >
             {isPhone ? 'View repository' : 'Visit live site'}
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -344,15 +395,19 @@ function FeaturedCard({ project }: { project: Project }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${project.title} — ${isPhone ? 'open repository' : 'open live site'}`}
-            className="block"
+            aria-label={`${project.title} — open repository`}
+            className="block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB]"
           >
             {isPhone ? (
               <span className="block w-[130px] xl:w-[130px]">
-                <Iphone src={project.image} />
+                <Iphone src={project.image} alt={`${project.title} preview`} />
               </span>
             ) : (
-              <Safari url={project.url} imageSrc={project.image} />
+              <Safari
+                url={project.url}
+                imageSrc={project.image}
+                imageAlt={`${project.title} preview`}
+              />
             )}
           </a>
         </div>
@@ -394,11 +449,15 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         {detail.stats && (
           <dl className="mt-6 grid grid-cols-3 gap-3 pt-6 md:mt-auto md:pt-8">
             {detail.stats.map(stat => (
-              <div key={stat.label} className="rounded-lg border border-border bg-muted/50 p-3">
+              <div
+                key={stat.label}
+                title={GLOSS[stat.value]}
+                className="rounded-lg border border-border bg-muted/50 p-3"
+              >
                 <dt className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
                   {stat.label}
                 </dt>
-                <dd className="mt-1 text-lg font-bold text-[#00B8DB]">{stat.value}</dd>
+                <dd className="mt-1 text-lg font-bold text-[#007A94] dark:text-[#00B8DB]">{stat.value}</dd>
               </div>
             ))}
           </dl>
@@ -407,7 +466,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         {detail.items && (
           <ul className="mt-6 space-y-2.5 pt-6 font-mono text-xs text-foreground/90 md:mt-auto md:pt-8 md:text-sm">
             {detail.items.map(item => (
-              <li key={item} className="flex items-start gap-2.5">
+              <li key={item} title={GLOSS[item]} className="flex items-start gap-2.5">
                 <span className="mt-[0.45em] block size-1.5 shrink-0 rounded-full bg-[#00B8DB]" />
                 {item}
               </li>
@@ -487,6 +546,12 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
 
             if (barRef.current) {
               barRef.current.style.transform = `scaleX(${progress})`
+              barRef.current.setAttribute(
+                'aria-valuenow',
+                String(
+                  Math.min(totalCards, Math.max(1, Math.round(progress * (totalCards - 1)) + 1))
+                )
+              )
             }
             if (counterRef.current && totalCards > 0) {
               const current = Math.min(
@@ -570,6 +635,11 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
             <div className="mt-2 h-px w-36 bg-border md:w-48">
               <div
                 ref={barRef}
+                role="progressbar"
+                aria-label={`${project.title} track progress`}
+                aria-valuemin={1}
+                aria-valuemax={cardCount(project)}
+                aria-valuenow={1}
                 className="h-px w-full origin-left bg-[#00B8DB]"
                 style={{ transform: 'scaleX(0)' }}
               />

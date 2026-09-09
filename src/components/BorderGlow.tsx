@@ -188,6 +188,8 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
       onPointerMove={handlePointerMove}
       onPointerEnter={() => setIsHovered(true)}
       onPointerLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
       className={`relative grid isolate border ${isDark ? 'border-transparent' : 'border-border'} ${className}`}
       style={{
         background: backgroundColor,
