@@ -371,7 +371,10 @@ export default function CursorPet({
         position: 'fixed',
         top: 0,
         left: 0,
-        zIndex: 100,
+        // Above footer (z-[1200]) + page GradualBlur (1000+100=1100) so the
+        // pet flies over them instead of sliding underneath. pointer-events
+        // is none so it never blocks back-to-top / links.
+        zIndex: 2000,
         backfaceVisibility: 'hidden',
         willChange: 'transform, background-position',
         contain: 'layout style paint',
