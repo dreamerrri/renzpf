@@ -47,6 +47,22 @@ export default function ProfileBadge({
     return () => mq.removeEventListener('change', update)
   }, [])
 
+  // Preload the UFO sprite without rendering it, so the easter egg stays
+  // hidden until first drag but still appears instantly on wake. Rendering
+  // the parked pet in-flow spoiled it two ways: (1) man.png is RGBA with
+  // transparent corners, so a 32px pet between photo and sticker shows
+  // through, and (2) ufo.png (small) usually paints before man.png (large),
+  // flashing the UFO before the sticker covers it.
+  useEffect(() => {
+    if (reducedMotion) return
+    const img = new Image()
+    img.src = '/ufo.png'
+    // Hint the decoder so wake has no first-frame jank.
+    if (typeof (img as { decode?: () => Promise<void> }).decode === 'function') {
+      ;(img as { decode: () => Promise<void> }).decode().catch(() => {})
+    }
+  }, [reducedMotion])
+
   // Important Note: re-added after the 5b1ec32 revert — dimming removed so the
   // bottom layer stays at full opacity. To restore the original rest-dim
   // effect, replace the two lines below with:
@@ -80,20 +96,21 @@ export default function ProfileBadge({
     setActive(false)
   }
 
-  // Important Note: UFO pet element. Parked in-flow behind the sticker until
-  // wake; portaled to document.body on wake so the badge's transform can stay
-  // without hijacking the pet's fixed viewport positioning.
-  const petNode = !reducedMotion ? (
-    <CursorPet
-      spriteImage="/ufo.png"
-      enabled={petAwake}
-      parked={!petAwake}
-      anchorRef={frameRef}
-      toggleKey="0"
-      toggleModifier="meta"
-      className={petAwake ? '' : 'col-start-1 row-start-1 place-self-center'}
-    />
-  ) : null
+  // Important Note: UFO pet element. Nothing renders in-flow before wake
+  // (keeps the easter egg hidden); on wake it mounts once via portal to
+  // document.body and snaps to the frame center pre-paint, then flies to
+  // the cursor. Skipped under reduced motion. Shortcut remapped off Alt+C.
+  const petNode =
+    !reducedMotion && petAwake ? (
+      <CursorPet
+        spriteImage="/ufo.png"
+        enabled={petAwake}
+        parked={false}
+        anchorRef={frameRef}
+        toggleKey="0"
+        toggleModifier="meta"
+      />
+    ) : null
 
   return (
     <div
@@ -153,12 +170,9 @@ export default function ProfileBadge({
             className="col-start-1 row-start-1 h-full w-full rounded-xl object-cover"
             style={{ opacity: photoOpacity, transform: `scale(${photoScale})` }}
           />
-          {/* Important Note: re-added after the 5b1ec32 revert — UFO pet parked
-              as a grid item between photo and sticker (32px, centered, hidden
-              behind the opaque sticker). On wake it remounts via portal below,
-              snaps to the frame center pre-paint, and flies to the cursor.
-              Skipped under reduced motion. Shortcut remapped off Alt+C. */}
-          {!petAwake && petNode}
+          {/* UFO easter egg: nothing parked here — pet mounts via portal below
+              only after first drag, so no flash before man.png loads and no
+              peek-through via man.png's transparent corners. */}
           <img
             src={stickerSrc}
             alt=""
@@ -200,7 +214,7 @@ export default function ProfileBadge({
           if (!dragStart.current && !pressed) setActive(false)
         }}
       />
-      {petAwake && petNode ? createPortal(petNode, document.body) : null}
+      {petNode ? createPortal(petNode, document.body) : null}
     </div>
   )
 }
