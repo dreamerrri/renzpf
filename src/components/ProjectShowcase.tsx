@@ -252,12 +252,12 @@ function GlowCard({ children, className = '' }: { children: ReactNode; className
     <BorderGlow
       glowColor="188 90 58"
       colors={GLOW_COLORS}
-      fillOpacity={isDark ? 0.4 : 0.25}
+      fillOpacity={isDark ? 0.4 : 0.45}
       borderRadius={20}
       glowRadius={28}
       coneSpread={14}
       animated={false}
-      className={className}
+      className={`${className} ring-1 ring-slate-900/[0.07] dark:ring-0`}
     >
       {children}
     </BorderGlow>
@@ -285,7 +285,7 @@ function FeaturedCard({ project }: { project: Project }) {
             {project.description}
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-[#00B8DB]/80">
+          <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-[#007A94] dark:text-[#00B8DB]/80">
             {project.tags.map(tag => (
               <li key={tag}>{tag}</li>
             ))}
@@ -395,7 +395,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
           <dl className="mt-6 grid grid-cols-3 gap-3 pt-6 md:mt-auto md:pt-8">
             {detail.stats.map(stat => (
               <div key={stat.label} className="rounded-lg border border-border bg-muted/50 p-3">
-                <dt className="font-mono text-[0.65rem] uppercase tracking-wide text-muted-foreground">
+                <dt className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
                   {stat.label}
                 </dt>
                 <dd className="mt-1 text-lg font-bold text-[#00B8DB]">{stat.value}</dd>
@@ -594,7 +594,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
         </Reveal>
 
         {!reducedMotion && (
-          <p className="flex items-center gap-2 px-6 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground md:px-12">
+          <p className="flex items-center gap-2 px-6 font-mono text-xs uppercase tracking-widest text-muted-foreground md:px-12">
             <span>Scroll</span>
             <svg
               width="12"

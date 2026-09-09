@@ -326,7 +326,7 @@ const Navbar = () => {
       <header
         className={`fixed top-0 left-0 z-40 flex w-full items-center justify-between px-6 transition-all duration-300 md:px-10 lg:px-12 ${
           hidden ? '-translate-y-full' : 'translate-y-0'
-        } ${scrolledToTop ? 'bg-transparent' : 'border-b border-border bg-background/80 backdrop-blur-md'}`}
+        } ${scrolledToTop ? 'bg-transparent' : 'border-b border-border bg-background/90 backdrop-blur-md dark:bg-background/80'}`}
         style={{ height: scrolledToTop ? '5rem' : '4rem' }}
       >
         <nav

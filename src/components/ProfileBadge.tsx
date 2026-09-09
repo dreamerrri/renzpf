@@ -171,7 +171,7 @@ export default function ProfileBadge({
               transform: `translate3d(${drag.x}px, ${drag.y}px, 0) scale(${pressed ? 0.9 : 1})`,
               transition: dragging
                 ? 'none'
-                : 'transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1)',
+                : 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)',
               touchAction: 'none',
             }}
           />

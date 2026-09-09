@@ -64,7 +64,7 @@ function RotatingRole({ words }: { words: string[] }) {
       onBlur={() => setPaused(false)}
       className="inline-block text-[#00B8DB]"
       style={{ minWidth: `${LONGEST_ROLE_CH}ch` }}
-      title="Pause on hover or focus"
+   
     >
       <span aria-hidden="true">{currentWord.slice(0, subIndex)}<span className="animate-pulse motion-reduce:animate-none">|</span></span>
       <span className="sr-only">{currentWord}</span>

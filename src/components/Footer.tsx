@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { GithubLogo, EnvelopeSimple } from '@phosphor-icons/react'
 import Reveal from '@/components/Reveal'
 import SpecularButton from '@/components/SpecularButton'
@@ -7,17 +6,7 @@ const EMAIL = 'andrewrennn@gmail.com'
 
 export default function Footer() {
   const year = new Date().getFullYear()
-  const [copied, setCopied] = useState(false)
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 2000)
-    } catch {
-      setCopied(false)
-    }
-  }
+  
 
   const backToTop = () => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches

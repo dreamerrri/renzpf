@@ -47,9 +47,9 @@ interface ShaderProps {
 const PAD = 20;
 
 const SIZES: Record<ButtonSize, string> = {
-  sm: 'text-[0.85rem] px-[22px] py-[10px]',
+  sm: 'text-sm px-[22px] py-[10px]',
   md: 'text-[1rem] px-[30px] py-[14px]',
-  lg: 'text-[1.15rem] px-10 py-[18px]'
+  lg: 'text-lg px-10 py-[18px]'
 };
 
 const VERT = `#version 300 es
@@ -158,7 +158,7 @@ const SpecularButton = ({
   }, []);
 
   const resolvedTextColor = textColor ?? (isDark ? '#f5f5f5' : '#0f172a');
-  const resolvedBaseColor = baseColor ?? (isDark ? '#525252' : '#94a3b8');
+  const resolvedBaseColor = baseColor ?? (isDark ? '#525252' : '#64748b');
 
   useEffect(() => {
     propsRef.current = { radius, lineColor, baseColor: resolvedBaseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };

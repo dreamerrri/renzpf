@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -42,6 +42,23 @@ function useSmoothScroll() {
 
 export function App() {
   useSmoothScroll()
+  const [isDark, setIsDark] = useState(
+    () =>
+      typeof document !== 'undefined' &&
+      document.documentElement.classList.contains('dark')
+  )
+
+  useEffect(() => {
+    const update = () =>
+      setIsDark(document.documentElement.classList.contains('dark'))
+    update()
+    const observer = new MutationObserver(update)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <div id="top" className="relative min-h-svh">
@@ -49,13 +66,13 @@ export function App() {
       <div className="fixed inset-0 z-0" aria-hidden="true">
         <CursorGrid
           cellSize={70}
-          color="#00B8DB"
+          color={isDark ? '#00B8DB' : '#009BBD'}
           radius={120}
           falloff="smooth"
           holdTime={400}
           fadeDuration={800}
           lineWidth={1}
-          maxOpacity={0.6}
+          maxOpacity={isDark ? 0.6 : 0.8}
           fillOpacity={0}
           gridOpacity={0}
           cellRadius={0}
