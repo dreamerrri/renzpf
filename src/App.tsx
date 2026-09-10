@@ -71,13 +71,13 @@ export function App() {
           falloff="smooth"
           holdTime={400}
           fadeDuration={800}
-          lineWidth={1}
+          lineWidth={1.4}
           maxOpacity={isDark ? 0.6 : 0.8}
           fillOpacity={0}
           gridOpacity={0}
           cellRadius={0}
           clickPulse
-          pulseSpeed={1200}
+          pulseSpeed={900}
         />
       </div>
 
