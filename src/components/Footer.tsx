@@ -60,7 +60,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub — open profile"
-              className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 py-2 font-mono text-xs transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+              className="inline-flex min-h-11 items-center gap-2 rounded-md px-3 py-2 font-mono text-[13px] transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
             >
               <GithubLogo size={20} />
               GitHub
@@ -69,7 +69,7 @@ export default function Footer() {
             <a
               href={`mailto:${EMAIL}`}
               aria-label={`Email ${EMAIL}`}
-              className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md px-3 py-2 font-mono text-xs transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+              className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-md px-3 py-2 font-mono text-[13px] transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
             >
               <EnvelopeSimple size={20} className="shrink-0" />
               <span className="break-all">Email</span>
@@ -78,14 +78,14 @@ export default function Footer() {
         </Reveal>
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8">
-        <p className="font-mono text-xs text-muted-foreground">
+        <p className="font-mono text-[13px] text-muted-foreground">
           © {year} <span className="text-[#00B8DB]">//A_</span> — built fast, accessible,
           detail-obsessed.
         </p>
         <button
           type="button"
           onClick={backToTop}
-          className="rounded-md font-mono text-xs text-muted-foreground transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+          className="rounded-md font-mono text-[13px] text-muted-foreground transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
         >
           Back to top ↑
         </button>

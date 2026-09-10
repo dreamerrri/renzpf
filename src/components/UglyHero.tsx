@@ -83,7 +83,7 @@ export default function UglyHero() {
 
       <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-10">
         <div className="min-w-0 flex-1">
-          <h1 className="text-5xl font-black leading-tight text-foreground sm:text-6xl md:text-7xl">
+          <h1 className="text-balance text-5xl font-black leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
             <TextType
               text="Andrew"
               typingSpeed={150}
@@ -94,7 +94,7 @@ export default function UglyHero() {
             
           </h1>
 
-          <p className="mt-4 min-h-[1.5em] text-2xl font-semibold text-muted-foreground md:text-4xl">
+          <p className="mt-4 min-h-[1.5em] text-balance text-2xl font-bold text-foreground md:text-4xl">
             I’m a&nbsp;<RotatingRole words={ROLES} />
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function UglyHero() {
         />
       </div>
 
-      <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+      <p className="mt-8 max-w-xl text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
         I build fast, accessible, and detail-obsessed experiences for the web. From
         pixel-perfect UI to silky interactions, I care about the craft and the people
         who use it.
@@ -124,7 +124,7 @@ export default function UglyHero() {
         </SpecularButton>
       </div>
 
-      <div className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-3 font-mono text-xs text-muted-foreground">
+      <div className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-3 font-mono text-[13px] text-muted-foreground">
         <span className="inline-flex min-h-11 items-center">
           <span className="text-[#00B8DB]">●</span>&nbsp;Open to work
         </span>

@@ -323,7 +323,7 @@ function FeaturedCard({ project }: { project: Project }) {
         <div className="min-w-0 flex-1">
           <div className="mb-4 flex items-center justify-between">
             <FolderIcon />
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-mono text-[13px] text-muted-foreground">
               Featured
             </span>
           </div>
@@ -336,7 +336,7 @@ function FeaturedCard({ project }: { project: Project }) {
             {project.description}
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-xs text-[#007A94] dark:text-[#00B8DB]">
+          <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[13px] text-[#007A94] dark:text-[#00B8DB]">
             {project.tags.map(tag => (
               <li key={tag}>{tag}</li>
             ))}
@@ -375,7 +375,7 @@ function FeaturedCard({ project }: { project: Project }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-1.5 rounded-sm font-mono text-xs text-[#007A94] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] dark:text-[#00B8DB]"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-sm font-mono text-[13px] text-[#007A94] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] dark:text-[#00B8DB]"
           >
             {isPhone ? 'View repository' : 'Visit live site'}
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -440,7 +440,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
           <span className="font-mono text-xs uppercase tracking-widest text-[#00B8DB]">
             {detail.kicker}
           </span>
-          <span className="truncate font-mono text-xs text-muted-foreground">{project.title}</span>
+          <span className="truncate font-mono text-[13px] text-muted-foreground">{project.title}</span>
         </div>
 
         <h4 className="text-xl font-bold text-foreground md:text-2xl">{detail.heading}</h4>
@@ -464,7 +464,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         )}
 
         {detail.items && (
-          <ul className="mt-6 space-y-2.5 pt-6 font-mono text-xs text-foreground/90 md:mt-auto md:pt-8 md:text-sm">
+          <ul className="mt-6 space-y-2.5 pt-6 text-sm leading-6 text-foreground/90 md:mt-auto md:pt-8">
             {detail.items.map(item => (
               <li key={item} title={GLOSS[item]} className="flex items-start gap-2.5">
                 <span className="mt-[0.45em] block size-1.5 shrink-0 rounded-full bg-[#00B8DB]" />
@@ -625,7 +625,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
             </h2>
           </div>
 
-          <div className="hidden shrink-0 text-right font-mono text-xs text-muted-foreground sm:block">
+          <div className="hidden shrink-0 text-right font-mono text-[13px] text-muted-foreground sm:block">
             <div>
               <span ref={counterRef} className="text-[#00B8DB]">
                 01
