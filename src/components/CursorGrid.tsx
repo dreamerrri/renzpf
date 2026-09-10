@@ -16,6 +16,7 @@ export interface CursorGridProps {
   cellRadius?: number;
   clickPulse?: boolean;
   pulseSpeed?: number;
+  clickPulseIgnore?: string;
   className?: string;
 }
 
@@ -33,6 +34,7 @@ interface GridConfig {
   cellRadius: number;
   clickPulse: boolean;
   pulseSpeed: number;
+  clickPulseIgnore: string;
 }
 
 interface Pulse {
@@ -54,6 +56,9 @@ const hexToRgb = (hex: string): [number, number, number] => {
   return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
 };
 
+const DEFAULT_CLICK_IGNORE =
+  'a, button, input, textarea, select, option, label, summary, details, [role="button"], [role="link"], [role="menuitem"], [contenteditable], [data-no-grid-pulse]';
+
 const CursorGrid = ({
   cellSize = 70,
   color = '#D946EF',
@@ -68,6 +73,7 @@ const CursorGrid = ({
   cellRadius = 0,
   clickPulse = true,
   pulseSpeed = 600,
+  clickPulseIgnore = DEFAULT_CLICK_IGNORE,
   className = ''
 }: CursorGridProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -89,7 +95,8 @@ const CursorGrid = ({
     gridOpacity,
     cellRadius,
     clickPulse,
-    pulseSpeed
+    pulseSpeed,
+    clickPulseIgnore
     };
   });
 
@@ -282,6 +289,19 @@ const CursorGrid = ({
 
     const onPointerDown = (e: PointerEvent) => {
       if (!propsRef.current.clickPulse) return;
+      // Left / primary clicks only — no right/middle-click ripples.
+      if (e.button !== 0 || e.isPrimary === false) return;
+      // Background-only ripple: skip clicks on links, buttons, inputs, etc.
+      // The grid canvas sits behind content (z-0) so it never gets the click
+      // directly — window does. Filtering by target is how we know it was
+      // a background click.
+      const target = e.target as HTMLElement | null;
+      // Opt-in wins: [data-grid-pulse] ripples even inside ignored elements
+      // (e.g. the theme toggle button).
+      if (!target?.closest?.('[data-grid-pulse]')) {
+        const ignore = propsRef.current.clickPulseIgnore;
+        if (target?.closest && ignore && target.closest(ignore)) return;
+      }
       const [x, y] = toLocal(e);
       pulses.push({ x, y, t0: performance.now() });
       wake();

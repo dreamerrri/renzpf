@@ -91,7 +91,7 @@ export default function UglyHero() {
               cursorCharacter="_"
               cursorBlinkDuration={0.6}
             />
-            <span className="text-[#00B8DB]">.</span>
+            
           </h1>
 
           <p className="mt-4 min-h-[1.5em] text-2xl font-semibold text-muted-foreground md:text-4xl">

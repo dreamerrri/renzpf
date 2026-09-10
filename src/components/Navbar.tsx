@@ -148,6 +148,7 @@ function ThemeToggle() {
       theme={resolved}
       onThemeChange={t => setTheme(t)}
       duration={600}
+      data-grid-pulse
       className="flex size-11 cursor-pointer items-center justify-center rounded-md bg-transparent text-muted-foreground transition-colors hover:bg-transparent hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB] [&_svg]:size-4"
     />
   )
