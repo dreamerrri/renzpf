@@ -77,7 +77,7 @@ export function App() {
           gridOpacity={0}
           cellRadius={0}
           clickPulse
-          pulseSpeed={600}
+          pulseSpeed={1200}
         />
       </div>
 
