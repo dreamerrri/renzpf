@@ -10,6 +10,7 @@ target_fingerprint: "sha256:339f296df458f25c705a4d82fbd5377caf6d607c4871a36cf407
 target_path: "C:\\Users\\Andrew\\Desktop\\renzpf\\src\\components\\ProjectShowcase.tsx"
 timestamp: 2026-09-09T02-26-50Z
 slug: src-components-projectshowcase-tsx
+closed: true
 ---
 Method: dual-agent (A: design-review · B: detector) — executed degraded single-context, see report header.
 

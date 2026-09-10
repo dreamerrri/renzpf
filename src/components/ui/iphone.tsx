@@ -85,6 +85,8 @@ export function Iphone({
           <img
             src={src}
             alt={alt ?? ""}
+            loading="lazy"
+            decoding="async"
             className="block size-full object-cover object-top"
           />
         </div>

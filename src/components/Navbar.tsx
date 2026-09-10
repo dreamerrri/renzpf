@@ -342,7 +342,7 @@ const Navbar = () => {
                 {NAV_LINKS.map(({ url, name }, i) => {
                   const isActive = activeHash === url
                   return (
-                    <li key={url} className="relative mx-[5px] text-xs">
+                    <li key={url} className="relative mx-[5px] text-[13px]">
                       <a
                         href={url}
                         aria-current={isActive ? 'true' : undefined}

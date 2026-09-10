@@ -129,7 +129,7 @@ A single-accent system: Workbench Cyan carries all action and wayfinding; neutra
 
 **Display Font:** Raleway Variable (with system sans fallback)
 **Body Font:** Raleway Variable (with system sans fallback)
-**Label/Mono Font:** UI monospace stack (Menlo / SFMono-Regular / monospace) — kickers, nav, tags, stats, footer
+**Label/Mono Font:** UI monospace stack (Menlo / SFMono-Regular / monospace) — kickers, nav, tags, stats, footer. Functional mono (nav links, tags, links, meta) floors at `13px` for legibility; uppercase tracked-out group labels stay `12px`.
 
 **Character:** Confident black headlines with relaxed muted body; forensic mono labels do the wayfinding. Raleway's tight black display against small tracked-out mono creates the terminal-meets-editorial tension.
 
