@@ -347,7 +347,7 @@ function FeaturedCard({ project }: { project: Project }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-            aria-label={`${project.title} — ${isPhone ? 'open repository' : 'open live site'}`}
+              aria-label={`${project.title} — open repository`}
               className="mt-5 flex justify-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] lg:hidden"
             >
               <span className="block w-[110px] sm:w-[130px]">
@@ -359,13 +359,14 @@ function FeaturedCard({ project }: { project: Project }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} — open live site`}
+              aria-label={`${project.title} — open repository`}
               className="mt-5 block overflow-hidden rounded-xl border border-border focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] lg:hidden"
             >
               <img
                 src={project.image}
                 alt={`${project.title} preview`}
                 loading="lazy"
+                decoding="async"
                 className="aspect-[16/9] w-full object-cover object-top"
               />
             </a>
@@ -375,9 +376,9 @@ function FeaturedCard({ project }: { project: Project }) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-1.5 rounded-sm font-mono text-[13px] text-[#007A94] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] dark:text-[#00B8DB]"
+            className="mt-6 inline-flex min-h-[44px] items-center gap-1.5 rounded-sm py-2 font-mono text-[13px] text-[#007A94] transition-opacity hover:opacity-80 active:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00B8DB] dark:text-[#00B8DB]"
           >
-            {isPhone ? 'View repository' : 'Visit live site'}
+            View repository
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
                 d="M7 17 17 7M8 7h9v9"
@@ -436,28 +437,28 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
   return (
     <GlowCard className="project-card h-auto w-[78vw] shrink-0 self-center sm:w-[70vw] md:h-full md:w-[420px] md:self-auto xl:w-[460px]">
       <article className="flex h-auto flex-col p-6 md:h-full md:min-h-0 md:p-9">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex items-center justify-between gap-3">
           <span className="font-mono text-xs uppercase tracking-widest text-[#00B8DB]">
             {detail.kicker}
           </span>
-          <span className="truncate font-mono text-[13px] text-muted-foreground">{project.title}</span>
+          <span title={project.title} className="truncate font-mono text-[13px] text-muted-foreground">{project.title}</span>
         </div>
 
-        <h4 className="text-xl font-bold text-foreground md:text-2xl">{detail.heading}</h4>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{detail.body}</p>
+        <h4 className="text-balance text-xl font-bold text-foreground md:text-2xl">{detail.heading}</h4>
+        <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted-foreground">{detail.body}</p>
 
         {detail.stats && (
           <dl className="mt-6 grid grid-cols-3 gap-3 pt-6 md:mt-auto md:pt-8">
             {detail.stats.map(stat => (
               <div
                 key={stat.label}
-                title={GLOSS[stat.value]}
-                className="rounded-lg border border-border bg-muted/50 p-3"
+                title={GLOSS[stat.value] ?? undefined}
+                className="min-w-0 overflow-hidden rounded-lg border border-border bg-muted/50 p-3"
               >
                 <dt className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
                   {stat.label}
                 </dt>
-                <dd className="mt-1 text-lg font-bold text-[#007A94] dark:text-[#00B8DB]">{stat.value}</dd>
+                <dd className="mt-1 break-words text-base font-bold text-[#007A94] sm:text-lg dark:text-[#00B8DB]">{stat.value}</dd>
               </div>
             ))}
           </dl>
@@ -466,7 +467,7 @@ function DetailCard({ project, detail }: { project: Project; detail: ProjectDeta
         {detail.items && (
           <ul className="mt-6 space-y-2.5 pt-6 text-sm leading-6 text-foreground/90 md:mt-auto md:pt-8">
             {detail.items.map(item => (
-              <li key={item} title={GLOSS[item]} className="flex items-start gap-2.5">
+              <li key={item} title={GLOSS[item] ?? undefined} className="flex items-start gap-2.5">
                 <span className="mt-[0.45em] block size-1.5 shrink-0 rounded-full bg-[#00B8DB]" />
                 {item}
               </li>
@@ -620,7 +621,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
             <p className="font-mono text-sm text-muted-foreground">
               {project.index} / {project.year} · {project.role}
             </p>
-            <h2 className="truncate text-2xl font-bold text-foreground md:text-4xl">
+            <h2 title={project.title} className="truncate text-2xl font-bold text-foreground md:text-4xl">
               {project.title}
             </h2>
           </div>

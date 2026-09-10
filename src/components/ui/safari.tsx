@@ -82,6 +82,8 @@ export function Safari({
           <img
             src={imageSrc}
             alt={imageAlt ?? ""}
+            loading="lazy"
+            decoding="async"
             className="block size-full object-cover object-top"
           />
         </div>
