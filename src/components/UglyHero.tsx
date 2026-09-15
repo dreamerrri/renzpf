@@ -4,7 +4,7 @@ import ProfileBadge from '@/components/ProfileBadge'
 import SpecularButton from '@/components/SpecularButton'
 import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 
-const ROLES = ['Frontend Developer', 'UI Engineer', 'Backend Developer', 'Chill Guy']
+const ROLES = ['Full Stack Developer' , 'UI/UX Designer']
 const LONGEST_ROLE_CH = Math.max(...ROLES.map(r => r.length))
 
 function RotatingRole({ words }: { words: string[] }) {

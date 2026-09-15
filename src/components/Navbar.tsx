@@ -90,19 +90,34 @@ function useActiveSection(): string {
       .filter((el): el is HTMLElement => el !== null)
     if (elements.length === 0) return
 
-    const observer = new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`)
-          }
+    // Scroll-spy by document position (not a 5% observer band).
+    // Reliable with pinned horizontal sections + short footer.
+    const onSpy = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      // Only force Contact at the very bottom — smaller threshold so
+      // Skills keeps its highlight until the footer actually arrives.
+      if (window.scrollY >= max - 80) {
+        setActive('#contact')
+        return
+      }
+      const pos = window.scrollY + window.innerHeight * 0.4
+      let current = `#${elements[0].id}`
+      for (const el of elements) {
+        const top = el.getBoundingClientRect().top + window.scrollY
+        if (top <= pos) {
+          current = `#${el.id}`
         }
-      },
-      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
-    )
+      }
+      setActive(current)
+    }
+    onSpy()
+    window.addEventListener('scroll', onSpy, { passive: true })
+    window.addEventListener('resize', onSpy)
 
-    elements.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+    return () => {
+      window.removeEventListener('scroll', onSpy)
+      window.removeEventListener('resize', onSpy)
+    }
   }, [])
 
   return active
@@ -302,19 +317,28 @@ function Menu({ activeHash }: { activeHash: string }) {
 
 const Navbar = () => {
   const [scrolledToTop, setScrolledToTop] = useState(true)
+  const [atBottom, setAtBottom] = useState(false)
   const scrollDirection = useScrollDirection('down')
   const activeHash = useActiveSection()
 
   const handleScroll = () => {
     setScrolledToTop(window.scrollY < 50)
+    const max = document.documentElement.scrollHeight - window.innerHeight
+    setAtBottom(window.scrollY >= max - 80)
   }
 
   useEffect(() => {
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => void window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
 
-  const hidden = scrollDirection === 'down' && !scrolledToTop
+  // Keep the bar visible at the page bottom so the Contact highlight stays visible.
+  const hidden = scrollDirection === 'down' && !scrolledToTop && !atBottom && activeHash !== '#contact'
 
   return (
     <>

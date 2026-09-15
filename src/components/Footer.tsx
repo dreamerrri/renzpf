@@ -85,7 +85,7 @@ export default function Footer() {
         <button
           type="button"
           onClick={backToTop}
-          className="rounded-md font-mono text-[13px] text-muted-foreground transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+          className="cursor-pointer rounded-md font-mono text-[13px] text-muted-foreground transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
         >
           Back to top ↑
         </button>
