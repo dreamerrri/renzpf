@@ -146,7 +146,7 @@ function SkillTile({ item, isDark }: { item: SkillItem; isDark: boolean }) {
       borderColor="var(--border)"
       borderRadius="10px"
       className="px-4 py-2.5"
-      style={{ cursor: 'default' }}
+      style={{ cursor: 'pointer' }}
       glareColor="#ffffff"
       glareOpacity={0.3}
       glareAngle={-30}
@@ -200,7 +200,7 @@ function SkillTile({ item, isDark }: { item: SkillItem; isDark: boolean }) {
         rel="noopener noreferrer"
         title={item.proof ? `${item.name} — shipped in ${item.proof}` : item.name}
         aria-label={label}
-        className="block rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+        className="block cursor-pointer rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
       >
         {tile}
       </a>
@@ -219,18 +219,7 @@ export default function Skills() {
             <span className="mr-2 text-muted-foreground">03.</span> My skills
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">What I work with</h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Linked tiles open the repo where each skill shipped — full history on{' '}
-            <a
-              href={GH}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-sm text-[#00B8DB] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
-            >
-              GitHub
-            </a>
-            .
-          </p>
+        
         </Reveal>
 
         <div className="mt-8 space-y-8">

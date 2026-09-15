@@ -106,26 +106,17 @@ const PROJECTS: Project[] = [
     url: 'https://github.com/dreamerrri/aki-sys',
     image: '/akisthrift.png',
     details: [
-      {
-        kicker: 'Overview',
-        heading: 'Stock stays correct at checkout',
-        body: 'Hard part was keeping variant stock consistent through payment — S3 for photos, PayMongo for cards, Pest suite locking it in.',
-        stats: [
-          { label: 'Payments', value: 'PayMongo' },
-          { label: 'Storage', value: 'S3' },
-          { label: 'Tests', value: 'Pest' }
-        ]
-      },
+  
       {
         kicker: 'Technologies',
-        heading: 'Server-rendered Laravel core',
-        body: 'Classic server-rendered Laravel with reactivity only where the shop needs it.',
+        heading: 'Laravel Project',
+        body: '',
         items: ['Laravel 11 + Blade', 'Alpine.js interactions', 'Tailwind CSS 3', 'MySQL + Eloquent', 'AWS S3 media storage']
       },
       {
         kicker: 'Features',
-        heading: 'Browse to paid order',
-        body: 'Variant stock decrements at payment time, so two buyers can’t checkout the last item.',
+        heading: 'Ecommerce + Inventory',
+        body: '',
         items: ['Product catalog & variants', 'Stock-level inventory tracking', 'PayMongo card checkout', 'Order management', 'S3 image uploads']
       }
     ]
@@ -142,26 +133,17 @@ const PROJECTS: Project[] = [
     url: 'https://github.com/dreamerrri/techstacks',
     image: '/logify.png',
     details: [
-      {
-        kicker: 'Overview',
-        heading: 'Payday without spreadsheets',
-        body: 'Hard part was keeping payroll auditable — one schema for records, attendance and runs, with printable PDF payslips per period.',
-        stats: [
-          { label: 'Payslips', value: 'PDF' },
-          { label: 'Auth', value: 'JWT' },
-          { label: 'Frontend', value: 'React 19' }
-        ]
-      },
+    
       {
         kicker: 'Technologies',
-        heading: 'Laravel with SPA feel',
-        body: 'Laravel backend with a React feel through Inertia — no separate API to maintain.',
+        heading: 'Laravel + React',
+        body: '',
         items: ['Laravel 12', 'Inertia.js v3 + React 19', 'Tailwind CSS 4', 'MySQL payroll schema', 'DomPDF payslip generation']
       },
       {
         kicker: 'Features',
-        heading: 'Hire to payday',
-        body: 'Calendar attendance feeds directly into payroll runs — no spreadsheet export step.',
+        heading: 'HR and Payroll workflow',
+        body: '',
         items: ['Employee records', 'Payroll runs & PDF payslips', 'Attendance calendar', 'Role-based access', 'Deployed on Railway']
       }
     ]
@@ -178,26 +160,17 @@ const PROJECTS: Project[] = [
     url: 'https://github.com/dreamerrri/frascio',
     image: '/frascio.png',
     details: [
-      {
-        kicker: 'Overview',
-        heading: 'Motion as a feature',
-        body: 'Hard part was holding 60fps without layout shift — route-driven transitions over a shared component system, fully type-safe.',
-        stats: [
-          { label: 'Stack', value: 'React 19' },
-          { label: 'Styling', value: 'Tailwind 4' },
-          { label: 'Motion', value: '60fps' }
-        ]
-      },
+ 
       {
         kicker: 'Technologies',
-        heading: 'Vite SPA + design system',
-        body: 'Modern Vite SPA with a design-system foundation.',
+        heading: 'React + Vite',
+        body: '',
         items: ['React 19 + TypeScript', 'Vite 8 builds', 'Tailwind CSS 4', 'shadcn/ui components', 'Motion page animation']
       },
       {
         kicker: 'Features',
         heading: 'Animated browsing end to end',
-        body: 'Shared layout transitions across pages, responsive from mobile to desktop.',
+        body: '',
         items: ['Animated page transitions', 'Responsive layouts', 'shadcn component system', 'React Router pages', 'Deployed on Vercel']
       }
     ]
@@ -214,67 +187,22 @@ const PROJECTS: Project[] = [
     url: 'https://github.com/MagicBeans54/Invoicify',
     image: '/invoicify.png',
     details: [
-      {
-        kicker: 'Overview',
-        heading: 'Invoices without the chaos',
-        body: 'Hard part was keeping dense tables fast and correct — TanStack tables with strictly validated forms for clients, items and statuses.',
-        stats: [
-          { label: 'Tables', value: 'TanStack' },
-          { label: 'Forms', value: 'Zod' },
-          { label: 'UI', value: 'shadcn' }
-        ]
-      },
+    
       {
         kicker: 'Technologies',
         heading: 'Inertia + TypeScript frontend',
-        body: 'Laravel + Inertia with a TypeScript React frontend.',
+        body: '',
         items: ['Laravel 12 + Inertia v3', 'React 19 + TypeScript', 'Tailwind CSS 4', 'TanStack Table', 'React Hook Form + Zod']
       },
       {
         kicker: 'Features',
         heading: 'Small billing workflow',
-        body: 'Zod-validated forms over TanStack tables — fast filtering even on dense invoice lists.',
+        body: '',
         items: ['Invoice builder', 'Client management', 'Filterable data tables', 'Validated forms', 'Status tracking']
       }
     ]
   },
-  {
-    index: '05',
-    title: 'Telemetry',
-    tagline: 'LAN + Cloud push-to-talk',
-    description:
-      'Android walkie-talkie — push-to-talk over local Wi-Fi with no internet, or join internet rooms with one word.',
-    tags: ['Push-to-talk', 'Offline voice', 'Voice rooms', 'Foreground service', 'Android'],
-    year: '2026',
-    role: 'Solo Developer',
-    url: 'https://github.com/dreamerrri/telemetry',
-    image: '/telemetry.jpg',
-    device: 'phone',
-    details: [
-      {
-        kicker: 'Overview',
-        heading: 'One button, offline or online',
-        body: 'Phone-to-phone voice over local Wi-Fi with no account, or join-by-word internet rooms — audio runs as a foreground service so it keeps talking screen-off.',
-        stats: [
-          { label: 'LAN', value: 'UDP' },
-          { label: 'Cloud', value: 'LiveKit' },
-          { label: 'Audio', value: '16kHz' }
-        ]
-      },
-      {
-        kicker: 'Technologies',
-        heading: 'Native Android + cloud minter',
-        body: 'Native Android with a tiny Cloudflare token minter — no API secret lives in the app.',
-        items: ['Kotlin + Jetpack Compose M3', 'Foreground service voice + UDP :50005', 'LiveKit Cloud rooms + Opus WebRTC', 'Cloudflare Worker token minter', 'UDP beacons :50006 presence']
-      },
-      {
-        kicker: 'Features',
-        heading: 'Hold-to-talk everywhere',
-        body: 'Volume-button push-to-talk that keeps running screen-off, with signal dots for quality.',
-        items: ['Hold-to-talk + volume-key PTT', 'LAN Direct no-internet voice', 'Cloud channels join-by-word', 'NEARBY discovery + quick texts', 'Screen-off service + quality dots']
-      }
-    ]
-  }
+ 
 ]
 
 function useIsDark() {
@@ -323,9 +251,7 @@ function FeaturedCard({ project }: { project: Project }) {
         <div className="min-w-0 flex-1">
           <div className="mb-4 flex items-center justify-between">
             <FolderIcon />
-            <span className="font-mono text-[13px] text-muted-foreground">
-              Featured
-            </span>
+           
           </div>
 
           <p className="font-mono text-sm text-[#00B8DB]">{project.tagline}</p>
@@ -666,25 +592,7 @@ function ProjectSection({ project, projectNumber, totalProjects, reducedMotion }
 
         {!reducedMotion && (
           <p className="flex items-center gap-2 px-6 font-mono text-xs uppercase tracking-widest text-muted-foreground md:px-12">
-            <span>Scroll</span>
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 5v14m-6-6 6 6 6-6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>
-              to explore {project.title} details
-            </span>
+           
           </p>
         )}
       </div>
@@ -711,10 +619,7 @@ export default function ProjectShowcase() {
             <span className="mr-2 text-muted-foreground">02.</span> My work
           </p>
           <h2 className="text-3xl font-bold text-foreground md:text-4xl">Selected projects</h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Five shipped projects — each pans sideways to show outcome, stack, and code.
-          </p>
-        </Reveal>
+          </Reveal>
       </section>
 
       {PROJECTS.map((project, i) => (
