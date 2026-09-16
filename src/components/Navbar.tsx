@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
+import { LinkButton } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
 
 type ScrollDirection = 'up' | 'down'
@@ -15,6 +16,9 @@ const NAV_LINKS: NavLink[] = [
   { name: 'Skills', url: '#skills' },
   { name: 'Contact', url: '#contact' }
 ]
+
+// Resume ships from `public/`; spaces + commas percent-encoded so static hosts resolve it.
+const RESUME_URL = '/Ebreo,%20Renz%20Andrew%20-%20Resume.pdf'
 
 function scrollToSection(hash: string) {
   window.history.replaceState(null, '', hash)
@@ -308,7 +312,17 @@ function Menu({ activeHash }: { activeHash: string }) {
               )
             })}
           </ol>
-          {/* Resume hidden until public/resume.pdf ships — avoids 404 at hiring moment. */}
+          <LinkButton
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="outline"
+            onClick={closeAndRestore}
+            aria-label="Resume — open PDF"
+            className="mt-4 px-12 py-4 text-[#00B8DB]"
+          >
+            Resume
+          </LinkButton>
         </nav>
       </aside>
     </div>
@@ -381,8 +395,21 @@ const Navbar = () => {
                     </li>
                   )
                 })}
+                <li className="relative mx-[5px] text-[13px]">
+                  <a
+                    href={RESUME_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Resume — open PDF"
+                    className="nav-fade-down inline-block rounded-md px-2.5 py-2.5 text-muted-foreground transition-colors hover:text-[#00B8DB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00B8DB]"
+                  >
+                    <span className="mr-[5px] text-left text-[#00B8DB]">
+                      {String(NAV_LINKS.length + 1).padStart(2, '0')}.
+                    </span>
+                    Resume
+                  </a>
+                </li>
               </ol>
-              {/* Resume hidden until public/resume.pdf ships — avoids 404 at hiring moment. */}
             </div>
 
             <div className="nav-fade-down">
