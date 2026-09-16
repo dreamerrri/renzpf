@@ -26,9 +26,9 @@ Single-page scroll portfolio with numbered sections: About (01), Work (02), Skil
 
 ## Capabilities and Constraints
 
-Confirmed functionality: hero with name, rotating roles, intro, Get-in-touch mailto, open-to-work status and GitHub/LinkedIn/email links; five featured projects each with overview, tech stack, features, tags, year, role, repo link, and Safari/iPhone mock; skills grouped as Languages, Frameworks & Libraries, Tools & Platforms; contact footer with email CTA, socials, copyright, back-to-top; light/dark theme toggle.
+Confirmed functionality: hero with name, rotating roles, intro, Get-in-touch mailto, open-to-work status and GitHub/LinkedIn/email links; five featured projects each with overview, tech stack, features, tags, year, role, repo link, and Safari/iPhone mock; skills grouped as Languages, Frameworks & Libraries, Tools & Platforms; contact footer with email CTA, socials, copyright, back-to-top; light/dark theme toggle; resume PDF linked as `05. Resume` in the desktop nav and an outline pill in the mobile drawer, both opening in a new tab.
 
-Technical constraints: existing static Vite React 19 + TypeScript + Tailwind CSS 4 SPA with client-side anchor navigation; skill icons loaded from skillicons.dev and simpleicons CDNs (network dependency); resume linked at `/resume.pdf` in UI but no file exists in repo.
+Technical constraints: existing static Vite React 19 + TypeScript + Tailwind CSS 4 SPA with client-side anchor navigation; skill icons loaded from skillicons.dev and simpleicons CDNs (network dependency); resume served from `public/` and linked as `/Ebreo,%20Renz%20Andrew%20-%20Resume.pdf` (percent-encoded path) from the desktop nav and mobile drawer.
 
 Explicitly undecided: freelance or client positioning, target role titles and seniority, availability start date, location and remote policy.
 
@@ -40,7 +40,7 @@ Name: Andrew. Title: `Andrew //A_ — Developer`. Logo mark: `//A_`. Voice: dire
 
 Real: five projects with descriptions, tags, years, roles, repo URLs, and images defined in `src/components/ProjectShowcase.tsx`; public images `akisthrift.png`, `logify.png`, `frascio.png`, `invoicify.png`, `telemetry.jpg`; profile images `tree.png`, `man.png`; contact email and GitHub above.
 
-Absences future work must not fabricate: `resume.pdf` is linked but missing from `public/`; LinkedIn URL is generic `linkedin.com/`; no testimonials, clients, metrics, case studies, pricing, or deployment claims confirmed.
+Absences future work must not fabricate: LinkedIn URL is generic `linkedin.com/`; no testimonials, clients, metrics, case studies, pricing, or deployment claims confirmed.
 
 ## Product Principles
 
