@@ -169,7 +169,7 @@ const PROJECTS: Project[] = [
       },
       {
         kicker: 'Features',
-        heading: 'Animated browsing end to end',
+        heading: 'Animated Landing Page',
         body: '',
         items: ['Animated page transitions', 'Responsive layouts', 'shadcn component system', 'React Router pages', 'Deployed on Vercel']
       }
