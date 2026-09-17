@@ -101,7 +101,7 @@ const PROJECTS: Project[] = [
     description:
       'Online thrift store — browse variants, track stock live, pay by card.',
     tags: ['E-commerce', 'Inventory', 'Card payments', 'S3 uploads', 'Pest tested'],
-    year: '2024-2025',
+    year: 'OCT 2024 - NOV 2025',
     role: 'Lead Developer',
     url: 'https://github.com/dreamerrri/aki-sys',
     image: '/akisthrift.png',
@@ -128,7 +128,7 @@ const PROJECTS: Project[] = [
     description:
       'HR and payroll in one place — records, attendance, runs, printable payslips.',
     tags: ['HR', 'Payroll', 'Attendance', 'Payslips', 'Access control'],
-    year: '2024',
+    year: 'MAY - AUG 2026',
     role: 'Design & Development',
     url: 'https://github.com/dreamerrri/techstacks',
     image: '/logify.png',
@@ -155,7 +155,7 @@ const PROJECTS: Project[] = [
     description:
       'Marketing storefront where every page transition feels physical.',
     tags: ['Storefront', 'Marketing site', 'Design system', 'Page transitions', 'Responsive'],
-    year: '2024',
+    year: 'JULY - AUG 2026',
     role: 'Frontend Engineer',
     url: 'https://github.com/dreamerrri/frascio',
     image: '/frascio.png',
@@ -182,7 +182,7 @@ const PROJECTS: Project[] = [
     description:
       'Billing workspace — build invoices on validated forms over filterable tables.',
     tags: ['Invoicing', 'Clients', 'Data tables', 'Validated forms', 'Status tracking'],
-    year: '2023',
+    year: 'AUG - SEPT 2026',
     role: 'Developer',
     url: 'https://github.com/MagicBeans54/Invoicify',
     image: '/invoicify.png',
